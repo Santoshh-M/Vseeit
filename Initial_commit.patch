@@ -1,0 +1,7 @@
+Index: app/src/main/java/com/santosh/vseeit/HomePageAdapter.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/santosh/vseeit/HomePageAdapter.java	(revision 8e83f473cb74f23d816c698254d713e1c26a8fce)
++++ app/src/main/java/com/santosh/vseeit/HomePageAdapter.java	(date 1606642930926)
