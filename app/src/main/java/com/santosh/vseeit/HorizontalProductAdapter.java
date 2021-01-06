@@ -1,5 +1,6 @@
 package com.santosh.vseeit;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -55,14 +56,21 @@ public class HorizontalProductAdapter extends RecyclerView.Adapter<HorizontalPro
             private TextView prdis;
             private TextView prprice;
 
-        public ViewHolder(@NonNull View itemView) {
+        public ViewHolder(@NonNull final View itemView) {
             super(itemView);
             primg = itemView.findViewById(R.id.h_s_product_img);
             prtitle = itemView.findViewById(R.id.h_s_product_title);
             prdis = itemView.findViewById(R.id.h_s_product_dis);
             prprice = itemView.findViewById(R.id.h_s_product_price);
-        }
 
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent pdIntent = new Intent(itemView.getContext(),ProductActivity.class);
+                    itemView.getContext().startActivity(pdIntent);
+                }
+            });
+        }
         private void setPrimg(int resource){
             primg.setImageResource(resource);
         }
