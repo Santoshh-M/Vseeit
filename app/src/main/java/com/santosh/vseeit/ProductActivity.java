@@ -21,7 +21,8 @@ import java.util.List;
 public class ProductActivity extends AppCompatActivity {
     private ViewPager proimgviewpager;
     private TabLayout viewpagerIndi;
-
+    private ViewPager productDetailsviewpager;
+    private TabLayout productDetailsTablayout;
     private static boolean ALREADY_ADDED_TO_WISH = false;
     private FloatingActionButton addtowish;
     @Override
@@ -37,11 +38,15 @@ public class ProductActivity extends AppCompatActivity {
             proimgviewpager = findViewById(R.id.pro_images_vwpager);
             viewpagerIndi = findViewById(R.id.viewpager_indicator);
             addtowish = findViewById(R.id.adtowish);
+            productDetailsviewpager = findViewById(R.id.pro_images_vwpager);
+            productDetailsTablayout = findViewById(R.id.product_details_tablayout);
+
         List<Integer> productImgs = new ArrayList<>();
         productImgs.add(R.drawable.phone);
         productImgs.add(R.drawable.phone);
         productImgs.add(R.drawable.splashscreen);
         productImgs.add(R.drawable.forgotpass);
+
 
         ProductimagesAdapter productimagesAdapter = new ProductimagesAdapter(productImgs);
         proimgviewpager.setAdapter(productimagesAdapter);
@@ -59,6 +64,25 @@ public class ProductActivity extends AppCompatActivity {
                     }
                 }
             });
+
+        productDetailsviewpager.setAdapter(new ProductDetailsAdapter(getSupportFragmentManager(),productDetailsTablayout.getTabCount()));
+        productDetailsviewpager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(productDetailsTablayout));
+        productDetailsTablayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                productDetailsviewpager.setCurrentItem(tab.getPosition());
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

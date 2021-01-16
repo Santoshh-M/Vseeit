@@ -11,7 +11,7 @@
         android:roundIcon="@mipmap/app_icon"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ProductActivity"></activity>
+        <activity android:name=".ProductActivity" />
         <activity android:name=".CategoryActivity" />
         <activity
             android:name=".MainActivity"
