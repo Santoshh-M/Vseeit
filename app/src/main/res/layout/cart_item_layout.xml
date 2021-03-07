@@ -95,7 +95,7 @@
         app:layout_constraintTop_toBottomOf="@+id/pro_price" />
 
     <TextView
-        android:id="@+id/textView11"
+        android:id="@+id/couponapplied"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
@@ -134,7 +134,7 @@
         android:padding="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView11">
+        app:layout_constraintTop_toBottomOf="@+id/couponapplied">
 
         <TextView
             android:id="@+id/coupn_redem_tv"
