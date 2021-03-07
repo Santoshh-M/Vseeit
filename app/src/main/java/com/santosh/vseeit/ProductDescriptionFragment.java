@@ -11,8 +11,8 @@ import androidx.fragment.app.Fragment;
 
 public class ProductDescriptionFragment extends Fragment {
 
-            public ProductDescriptionFragment() {
-            }
+    public ProductDescriptionFragment() {
+                    }
 
         @Nullable
         @Override
@@ -20,5 +20,4 @@ public class ProductDescriptionFragment extends Fragment {
                                  @Nullable Bundle savedInstanceState) {
             return inflater.inflate(R.layout.fragment_product_description, container, false);
         }
-
     }

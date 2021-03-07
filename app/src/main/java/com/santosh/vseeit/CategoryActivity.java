@@ -88,11 +88,14 @@ public class CategoryActivity extends AppCompatActivity {
     }
     @Override
     public boolean onOptionsItemSelected (@NonNull MenuItem item){
-
         int id = item.getItemId();
-        if (id == R.id.main_search_icon) {
+        if (id == android.R.id.home) {
+            finish();
             return true;
         }
-        return super.onOptionsItemSelected(item);
-    }
+         if (id == R.id.main_search_icon) {
+                return true;
+            }
+            return super.onOptionsItemSelected(item);
+        }
 }

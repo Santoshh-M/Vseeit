@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/price_cut"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/pro_img"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/iph" />
+
+    <TextView
+        android:id="@+id/pro_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/fontnew"
+        android:text="Iphone 12 (Gold)"
+        android:textColor="#000000"
+        android:textSize="16sp"
+        app:layout_constraintStart_toEndOf="@+id/pro_img"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/free_coupon"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        app:tint="#8000ff"
+        app:layout_constraintStart_toStartOf="@+id/pro_title"
+        app:layout_constraintTop_toBottomOf="@+id/pro_title"
+        app:srcCompat="@drawable/tag" />
+
+    <TextView
+        android:id="@+id/tv_coupon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/fontnew"
+        android:text="Free Coupon"
+        android:textColor="#8000ff"
+        android:textSize="12sp"
+        app:layout_constraintStart_toEndOf="@+id/free_coupon"
+        app:layout_constraintTop_toBottomOf="@+id/pro_title" />
+
+    <TextView
+        android:id="@+id/pro_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:fontFamily="@font/fontnew"
+        android:text="Rs.59,999/-"
+        android:textColor="#000000"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_coupon" />
+
+    <TextView
+        android:id="@+id/cutting_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Rs.79,999"
+        app:layout_constraintBottom_toBottomOf="@+id/pro_price"
+        tools:layout_editor_absoluteX="217dp" />
+
+    <View
+        android:id="@+id/divider6"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintBottom_toBottomOf="@+id/cutting_price"
+        app:layout_constraintEnd_toEndOf="@+id/cutting_price"
+        app:layout_constraintStart_toStartOf="@+id/cutting_price"
+        app:layout_constraintTop_toTopOf="@+id/cutting_price" />
+</androidx.constraintlayout.widget.ConstraintLayout>

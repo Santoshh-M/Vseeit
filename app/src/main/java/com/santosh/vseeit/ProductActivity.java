@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,6 +25,11 @@ public class ProductActivity extends AppCompatActivity {
     private TabLayout viewpagerIndi;
     private ViewPager productDetailsviewpager;
     private TabLayout productDetailsTablayout;
+
+    /////rating layout
+    private LinearLayout ratenow;
+
+    /////rating layout
     private static boolean ALREADY_ADDED_TO_WISH = false;
     private FloatingActionButton addtowish;
     @Override
@@ -83,10 +90,32 @@ public class ProductActivity extends AppCompatActivity {
 
             }
         });
+        ///////rating layout
+        ratenow = findViewById(R.id.rate_str_5);
+        for (int x = 0;x < ratenow.getChildCount(); x++){
+          final int starposition = x;
+          ratenow.getChildAt(x).setOnClickListener(new View.OnClickListener(){
+              @Override
+              public void onClick(View v) {
+                setRating(starposition);
+              }
+          });
+        }
+        ///////rating layout
     }
+
+    private void setRating(int starposition) {
+    for (int s = 0;s < ratenow.getChildCount();s++){
+        ImageView strbtn = (ImageView)ratenow.getChildAt(s);
+        strbtn.setImageTintList(ColorStateList.valueOf(Color.parseColor("#bebebe")));
+        if (s <= starposition) {
+            strbtn.setImageTintList(ColorStateList.valueOf(Color.parseColor("#FFBF00")));
+            }
+        }
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.search_cart_icon, menu);
         return true;
     }

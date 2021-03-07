@@ -20,11 +20,11 @@ public class ProductDetailsAdapter extends FragmentPagerAdapter {
                 ProductDescriptionFragment productDescriptionFragment = new ProductDescriptionFragment();
                 return productDescriptionFragment;
            case 1:
-               ProductSpecification prospec = new ProductSpecification();
-               return prospec;
+               ProductSpecification productSpecification = new ProductSpecification();
+               return productSpecification;
            case 2:
-               ProductDescriptionFragment prodes = new ProductDescriptionFragment();
-               return prodes;
+               ProductDescriptionFragment productDescriptionFragment1 = new ProductDescriptionFragment();
+               return productDescriptionFragment1;
            default:
                return null;
        }

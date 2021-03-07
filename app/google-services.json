@@ -1,34 +1,33 @@
 {
   "project_info": {
-    "project_number": "651148160042",
-    "firebase_url": "https://vseeit-project1.firebaseio.com",
-    "project_id": "vseeit-project1",
-    "storage_bucket": "vseeit-project1.appspot.com"
+    "project_number": "643030692862",
+    "project_id": "vseeit-project",
+    "storage_bucket": "vseeit-project.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:651148160042:android:a65f5b07aee1f518922753",
+        "mobilesdk_app_id": "1:643030692862:android:1ffc594e2fa1af547806af",
         "android_client_info": {
           "package_name": "com.santosh.vseeit"
         }
       },
       "oauth_client": [
         {
-          "client_id": "651148160042-4glogsg0ljkdv5g1i11u113le7mrejg1.apps.googleusercontent.com",
+          "client_id": "643030692862-eg212q5ptjo1cf2smsph4kr321gkuqen.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBXUOEpAq8Ryaxvhb7d-dhMd06p_CrIK-E"
+          "current_key": "AIzaSyAffUr_D5a7kiyLVTln5Pf3pnhFLSsforU"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "651148160042-4glogsg0ljkdv5g1i11u113le7mrejg1.apps.googleusercontent.com",
+              "client_id": "643030692862-eg212q5ptjo1cf2smsph4kr321gkuqen.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

@@ -87,20 +87,18 @@ public class MainActivity extends AppCompatActivity
         }
 
     @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+    public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();
 
         if (id == R.id.nav_my_home) {
-            Intent home = new Intent(getApplicationContext(), Homefragment.class);
+            Intent home = new Intent(getApplicationContext(), MainActivity.class);
             startActivity(home);
-        }
-        else if (id == R.id.nav_my_order) {
-            Intent loged = new Intent(getApplicationContext(), Login.class);
+            finish();
+        } else if (id == R.id.nav_my_order) {
+            Intent loged = new Intent(getApplicationContext(), register.class);
             startActivity(loged);
-        }
-        else if (id == R.id.nav_my_account) {
-            Intent profile = new Intent(getApplicationContext(), Login.class);
-            startActivity(profile);
+        } else if (id == R.id.nav_my_account) {
+            Toast.makeText(this, "Account", Toast.LENGTH_SHORT).show();
 
         } else if (id == R.id.nav_my_settings) {
             Intent carted = new Intent(getApplicationContext(), Login.class);
@@ -113,7 +111,7 @@ public class MainActivity extends AppCompatActivity
             startActivity(sare);
         } else if (id == R.id.nav_my_logout) {
             finish();
-        }
+    }
         DrawerLayout  drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
