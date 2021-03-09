@@ -21,7 +21,11 @@ import com.google.android.material.navigation.NavigationView;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener{
 
+    private static final int HOME_FRAGMENT = 0;
+    private static final int CART_FRAGMENT = 1;
     private FrameLayout frameLayout;
+    private static int currentFragment;
+    private NavigationView navigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,12 +43,12 @@ public class MainActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.getMenu().getItem(0).setChecked(true);
 
         frameLayout = findViewById(R.id.main_framelayout);
-        setFragment(new Homefragment());
+        setFragment(new Homefragment(),HOME_FRAGMENT);
     }
 
     boolean doubleBackToExitPressedOnce = false;
@@ -68,7 +72,9 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
+        if (currentFragment == HOME_FRAGMENT){
+            getMenuInflater().inflate(R.menu.main, menu);
+        }
         return true;
     }
 
@@ -81,31 +87,33 @@ public class MainActivity extends AppCompatActivity
             } else if (id == R.id.main_notification_icon) {
                 return true;
             } else if (id == R.id.main_cart_icon) {
+               mycart();
                 return true;
             }
             return super.onOptionsItemSelected(item);
         }
 
+        private void mycart(){
+        invalidateOptionsMenu();
+        setFragment(new MyCart(),CART_FRAGMENT);
+            navigationView.getMenu().getItem(4).setChecked(true);
+        }
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();
 
         if (id == R.id.nav_my_home) {
-            Intent home = new Intent(getApplicationContext(), MainActivity.class);
-            startActivity(home);
-            finish();
+           setFragment(new Homefragment(),HOME_FRAGMENT);
         } else if (id == R.id.nav_my_order) {
             Intent loged = new Intent(getApplicationContext(), register.class);
             startActivity(loged);
         } else if (id == R.id.nav_my_account) {
             Toast.makeText(this, "Account", Toast.LENGTH_SHORT).show();
-
-        } else if (id == R.id.nav_my_settings) {
-            Intent carted = new Intent(getApplicationContext(), Login.class);
-            startActivity(carted);
-        } else if (id == R.id.nav_my_rewards) {
-            Intent favo = new Intent(getApplicationContext(), Login.class);
-            startActivity(favo);
+        }else if (id == R.id.nav_my_rewards) {
+                Intent favo = new Intent(getApplicationContext(), Login.class);
+                startActivity(favo);
+        } else if (id == R.id.nav_my_cart) {
+            mycart();
         } else if (id == R.id.nav_my_wishlist) {
             Intent sare = new Intent(getApplicationContext(), Login.class);
             startActivity(sare);
@@ -117,7 +125,8 @@ public class MainActivity extends AppCompatActivity
         return true;
         }
 
-    private void setFragment(Fragment fragment){
+    private void setFragment(Fragment fragment,int fragmentNo){
+        currentFragment = fragmentNo;
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(frameLayout.getId(),fragment);
         fragmentTransaction.commit();

@@ -49,6 +49,28 @@ public class CartAdapter extends RecyclerView.Adapter {
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+    switch (cartitemModelList.get(position).getType()){
+        case CartitemModel.CART_ITEM:
+            int resource = cartitemModelList.get(position).getProductimg();
+            String title = cartitemModelList.get(position).getProductTitle();
+            String proprice = cartitemModelList.get(position).getProductprice();
+            String cuttedprice = cartitemModelList.get(position).getCuttedprice();
+            int frecoupon = cartitemModelList.get(position).getFreecoupon();
+            int ofrapplied = cartitemModelList.get(position).getOffrapplied();
+            ((cartItemViewholder)holder).setItemDetails(resource,title,frecoupon,proprice,cuttedprice,ofrapplied);
+        break;
+        case CartitemModel.TOTAL_AMOUNT:
+            String ttlitm = cartitemModelList.get(position).getTotalItems();
+            String ttlitmprice = cartitemModelList.get(position).getTtlitmprice();
+            String deliver = cartitemModelList.get(position).getDelivercrg();
+            String  ttlamount = cartitemModelList.get(position).getTotalamount();
+            String saved = cartitemModelList.get(position).getSavedamt();
+
+            ((cartTotalAmountviewholder)holder).setTotalamt(ttlitm,ttlitmprice,deliver,ttlamount,saved);
+            break;
+        default:
+            return;
+    }
 
     }
 
@@ -83,7 +105,6 @@ public class CartAdapter extends RecyclerView.Adapter {
 
 
         }
-
         private void setItemDetails(int resource, String title, int freecouponNo, String productpriceText, String cuttedpriceText, int offrappliedNo) {
             proimg.setImageResource(resource);
             protitle.setText(title);
@@ -103,14 +124,37 @@ public class CartAdapter extends RecyclerView.Adapter {
                 productprice.setText(productpriceText);
                 cuttedprice.setText(cuttedpriceText);
                 if (offrappliedNo > 0){
-
+                    offrapplied.setVisibility(View.VISIBLE);
+                    offrapplied.setText(offrappliedNo + "offers applied");
+                } else {
+                    offrapplied.setVisibility(View.INVISIBLE);
                 }
+
             }
         }
 
         class cartTotalAmountviewholder extends RecyclerView.ViewHolder {
+        private TextView totalitms;
+        private TextView totalitmprice;
+            private TextView deliverycrg;
+            private TextView totalamt;
+            private TextView saveamt;
             public cartTotalAmountviewholder(@NonNull View itemView) {
                 super(itemView);
+
+                totalitms = itemView.findViewById(R.id.ttl_items);
+                totalitmprice = itemView.findViewById(R.id.ttl_item_price);
+                deliverycrg = itemView.findViewById(R.id.delivery_chrg);
+                totalamt = itemView.findViewById(R.id.ttl_price);
+                saveamt = itemView.findViewById(R.id.saved_amount);
+            }
+            private void setTotalamt(String ttlitmtxt, String ttlitmpritxt, String deltxt, String ttltxt, String savetxt){
+                totalitms.setText(ttlitmtxt);
+                totalitmprice.setText(ttlitmpritxt);
+                deliverycrg.setText(deltxt);
+                totalamt.setText(ttltxt);
+                saveamt.setText(savetxt);
+
             }
         }
     }

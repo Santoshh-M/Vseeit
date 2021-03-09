@@ -23,12 +23,8 @@ public class CartitemModel {
     private int offrapplied;
     private int coupnapplied;
 
-    public CartitemModel(int type, int productimg, String productTitle, String productprice, String cuttedprice, int freecoupon, int proqtty, int offrapplied, int coupnapplied, int totalItems, String ttlamount, String delivercrg, String savedamount) {
+    public CartitemModel(int type, int productimg, String productTitle, String productprice, String cuttedprice, int freecoupon, int proqtty, int offrapplied, int coupnapplied) {
         this.type = type;
-        this.totalItems = totalItems;
-        Ttlamount = ttlamount;
-        this.delivercrg = delivercrg;
-        this.savedamount = savedamount;
         this.productimg = productimg;
         this.productTitle = productTitle;
         this.productprice = productprice;
@@ -102,38 +98,39 @@ public class CartitemModel {
     public void setCoupnapplied(int coupnapplied) {
         this.coupnapplied = coupnapplied;
     }
-
-
 ///// cart item
 
         ///////// cart total
-        private int totalItems;
-        private String Ttlamount;
+        private String totalItems;
+        private String Ttlitmprice;
         private String delivercrg;
-        private String savedamount;
+        private String  Totalamount;
+        private String savedamt;
 
-    public CartitemModel(int type, int totalItems, String ttlamount, String delivercrg, String savedamount) {
+
+    public CartitemModel(int type, String totalItems, String ttlitmprice, String delivercrg, String totalamount,String savedamt) {
         this.type = type;
         this.totalItems = totalItems;
-        Ttlamount = ttlamount;
+        this.Ttlitmprice = ttlitmprice;
         this.delivercrg = delivercrg;
-        this.savedamount = savedamount;
+        this.Totalamount = totalamount;
+        this.savedamt = savedamt;
     }
 
-    public int getTotalItems() {
+    public String getTotalItems() {
         return totalItems;
     }
 
-    public void setTotalItems(int totalItems) {
+    public void setTotalItems(String totalItems) {
         this.totalItems = totalItems;
     }
 
-    public String getTtlamount() {
-        return Ttlamount;
+    public String getTtlitmprice() {
+        return Ttlitmprice;
     }
 
-    public void setTtlamount(String ttlamount) {
-        Ttlamount = ttlamount;
+    public void setTtlitmprice(String ttlitmprice) {
+        Ttlitmprice = ttlitmprice;
     }
 
     public String getDelivercrg() {
@@ -144,13 +141,22 @@ public class CartitemModel {
         this.delivercrg = delivercrg;
     }
 
-    public String getSavedamount() {
-        return savedamount;
+    public String getTotalamount() {
+        return Totalamount;
     }
 
-    public void setSavedamount(String savedamount) {
-        this.savedamount = savedamount;
+    public void setTotalamount(String totalamount) {
+        Totalamount = totalamount;
     }
-    //////// cart total
+
+    public String getSavedamt() {
+        return savedamt;
+    }
+
+    public void setSavedamt(String savedamt) {
+        this.savedamt = savedamt;
+    }
+
+//////// cart total
 
 }
