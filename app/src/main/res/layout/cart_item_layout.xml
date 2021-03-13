@@ -2,10 +2,12 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/price_cut"
-    android:elevation="3dp"
-    android:background="@color/white"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:layout_marginTop="4dp"
+    android:layout_marginBottom="4dp"
+    android:background="@color/white"
+    android:elevation="3dp">
 
     <ImageView
         android:id="@+id/pro_img"
@@ -34,10 +36,11 @@
         android:id="@+id/free_coupon"
         android:layout_width="15dp"
         android:layout_height="15dp"
-        app:tint="#8000ff"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_coupon"
         app:layout_constraintStart_toStartOf="@+id/pro_title"
-        app:layout_constraintTop_toBottomOf="@+id/pro_title"
-        app:srcCompat="@drawable/tag" />
+        app:layout_constraintTop_toTopOf="@+id/tv_coupon"
+        app:srcCompat="@drawable/tag"
+        app:tint="#8000ff" />
 
     <TextView
         android:id="@+id/tv_coupon"
@@ -69,6 +72,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
+        android:textSize="12sp"
+        android:fontFamily="@font/fontnew"
         android:text="Rs.79,999"
         app:layout_constraintBottom_toBottomOf="@+id/pro_price"
         app:layout_constraintEnd_toStartOf="@+id/pro_price" />
@@ -88,9 +93,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
+        android:fontFamily="@font/fontnew"
         android:text="Offers Applied"
         android:textColor="@color/successgreen"
-        android:fontFamily="@font/fontnew"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/pro_price" />
 
@@ -111,15 +116,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
+        android:background="@drawable/border_background"
+        android:backgroundTint="#000000"
+        android:drawableEnd="@drawable/down"
+        android:paddingTop="6dp"
+        android:drawablePadding="4dp"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:drawableTint="#000000"
         android:fontFamily="@font/fontnew"
         android:text="Qty: 5"
-        android:background="@drawable/border_background"
         android:textColor="#000000"
-        android:backgroundTint="#000000"
-        android:padding="5dp"
-        android:drawableEnd="@drawable/down"
-        android:drawableTint="#000000"
-        android:drawablePadding="8dp"
         app:layout_constraintBottom_toBottomOf="@+id/textView11"
         app:layout_constraintStart_toEndOf="@+id/pro_img"
         app:layout_constraintTop_toBottomOf="@+id/cutting_price" />
@@ -128,10 +135,11 @@
         android:id="@+id/coupoun_redeem_layout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:background="#ff3030"
         android:gravity="right"
         android:orientation="horizontal"
-        android:padding="16dp"
+        android:padding="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/couponapplied">
@@ -148,8 +156,8 @@
 
         <Button
             android:id="@+id/coupn_redem_btn"
-            android:layout_width="75dp"
-            android:layout_height="30dp"
+            android:layout_width="100dp"
+            android:layout_height="35dp"
             android:background="@drawable/border_background"
             android:text="Redeem"
             android:textColor="@color/white"
@@ -160,24 +168,24 @@
         android:id="@+id/remove_item_lyt"
         android:layout_width="match_parent"
         android:layout_height="56dp"
-        android:background="@color/white"
+        android:background="@color/background"
         android:elevation="3dp"
         android:gravity="center"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/coupoun_redeem_layout">
-        
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:drawableStart="@drawable/delete"
+            android:drawableTint="#000000"
+            android:fontFamily="@font/fontnew"
+            android:gravity="center"
+            android:paddingRight="5dp"
             android:text="Remove item"
             android:textColor="#000000"
-            android:gravity="center"
-            android:fontFamily="@font/fontnew"
-            android:textStyle="bold"
-            android:paddingRight="5dp"
-            android:drawableStart="@drawable/delete"
-            android:drawableTint="#000000"/>
+            android:textStyle="bold" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

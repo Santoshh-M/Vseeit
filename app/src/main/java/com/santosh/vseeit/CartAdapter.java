@@ -53,11 +53,11 @@ public class CartAdapter extends RecyclerView.Adapter {
         case CartitemModel.CART_ITEM:
             int resource = cartitemModelList.get(position).getProductimg();
             String title = cartitemModelList.get(position).getProductTitle();
-            String proprice = cartitemModelList.get(position).getProductprice();
-            String cuttedprice = cartitemModelList.get(position).getCuttedprice();
             int frecoupon = cartitemModelList.get(position).getFreecoupon();
+            String proprice = cartitemModelList.get(position).getProductprice();
+            String cutprice = cartitemModelList.get(position).getCuttedprice();
             int ofrapplied = cartitemModelList.get(position).getOffrapplied();
-            ((cartItemViewholder)holder).setItemDetails(resource,title,frecoupon,proprice,cuttedprice,ofrapplied);
+            ((cartItemViewholder)holder).setItemDetails(resource,title,frecoupon,proprice,cutprice,ofrapplied);
         break;
         case CartitemModel.TOTAL_AMOUNT:
             String ttlitm = cartitemModelList.get(position).getTotalItems();
@@ -79,7 +79,7 @@ public class CartAdapter extends RecyclerView.Adapter {
         return cartitemModelList.size();
     }
 
-    class cartItemViewholder extends RecyclerView.ViewHolder {
+public class cartItemViewholder extends RecyclerView.ViewHolder {
         private ImageView proimg;
         private ImageView freecouponicon;
         private TextView protitle;
@@ -112,20 +112,20 @@ public class CartAdapter extends RecyclerView.Adapter {
                 freecouponicon.setVisibility(View.VISIBLE);
                 freecoupon.setVisibility(View.VISIBLE);
                     if (freecouponNo == 1) {
-                        freecoupon.setText("Free" + freecouponNo + "Coupon");
+                        freecoupon.setText("Free " + freecouponNo + " Coupon");
                     }   else {
-                        freecoupon.setText("Free" + freecouponNo + "Coupon");
+                        freecoupon.setText("Free " + freecouponNo + " Coupon");
 
                     }
             }else {
                 freecouponicon.setVisibility(View.INVISIBLE);
                 freecoupon.setVisibility(View.INVISIBLE);
-            }
                 productprice.setText(productpriceText);
                 cuttedprice.setText(cuttedpriceText);
+            }
                 if (offrappliedNo > 0){
                     offrapplied.setVisibility(View.VISIBLE);
-                    offrapplied.setText(offrappliedNo + "offers applied");
+                    offrapplied.setText(offrappliedNo + " offers applied");
                 } else {
                     offrapplied.setVisibility(View.INVISIBLE);
                 }
@@ -133,7 +133,7 @@ public class CartAdapter extends RecyclerView.Adapter {
             }
         }
 
-        class cartTotalAmountviewholder extends RecyclerView.ViewHolder {
+       public class cartTotalAmountviewholder extends RecyclerView.ViewHolder {
         private TextView totalitms;
         private TextView totalitmprice;
             private TextView deliverycrg;
@@ -142,11 +142,11 @@ public class CartAdapter extends RecyclerView.Adapter {
             public cartTotalAmountviewholder(@NonNull View itemView) {
                 super(itemView);
 
-                totalitms = itemView.findViewById(R.id.ttl_items);
-                totalitmprice = itemView.findViewById(R.id.ttl_item_price);
-                deliverycrg = itemView.findViewById(R.id.delivery_chrg);
-                totalamt = itemView.findViewById(R.id.ttl_price);
-                saveamt = itemView.findViewById(R.id.saved_amount);
+                totalitms = (TextView)itemView.findViewById(R.id.ttl_items);
+                totalitmprice = (TextView)itemView.findViewById(R.id.ttl_item_price);
+                deliverycrg =(TextView) itemView.findViewById(R.id.delivery_chrg);
+                totalamt = (TextView)itemView.findViewById(R.id.ttl_price);
+                saveamt = (TextView)itemView.findViewById(R.id.saved_amount);
             }
             private void setTotalamt(String ttlitmtxt, String ttlitmpritxt, String deltxt, String ttltxt, String savetxt){
                 totalitms.setText(ttlitmtxt);

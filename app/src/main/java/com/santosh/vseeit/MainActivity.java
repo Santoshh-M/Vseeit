@@ -5,7 +5,9 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -24,6 +26,7 @@ public class MainActivity extends AppCompatActivity
     private static final int HOME_FRAGMENT = 0;
     private static final int CART_FRAGMENT = 1;
     private FrameLayout frameLayout;
+    private ImageView actionBarlogo;
     private static int currentFragment;
     private NavigationView navigationView;
 
@@ -33,6 +36,7 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
+        actionBarlogo = findViewById(R.id.actionbar_logo);
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setDisplayShowTitleEnabled(false);
@@ -94,6 +98,9 @@ public class MainActivity extends AppCompatActivity
         }
 
         private void mycart(){
+        actionBarlogo.setVisibility(View.GONE);
+            getSupportActionBar().setDisplayShowTitleEnabled(true);
+            getSupportActionBar().setTitle("My Cart");
         invalidateOptionsMenu();
         setFragment(new MyCart(),CART_FRAGMENT);
             navigationView.getMenu().getItem(4).setChecked(true);
@@ -103,6 +110,9 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_my_home) {
+            getSupportActionBar().setDisplayShowTitleEnabled(false);
+            actionBarlogo.setVisibility(View.VISIBLE);
+            invalidateOptionsMenu();
            setFragment(new Homefragment(),HOME_FRAGMENT);
         } else if (id == R.id.nav_my_order) {
             Intent loged = new Intent(getApplicationContext(), register.class);
@@ -125,10 +135,14 @@ public class MainActivity extends AppCompatActivity
         return true;
         }
 
-    private void setFragment(Fragment fragment,int fragmentNo){
-        currentFragment = fragmentNo;
-        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(frameLayout.getId(),fragment);
-        fragmentTransaction.commit();
+    private void setFragment(Fragment fragment,int fragmentNo) {
+        if (fragmentNo != currentFragment) {
+
+            currentFragment = fragmentNo;
+            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.setCustomAnimations(R.anim.fade_in, R.anim.fade_out);
+            fragmentTransaction.replace(frameLayout.getId(), fragment);
+            fragmentTransaction.commit();
+        }
     }
 }

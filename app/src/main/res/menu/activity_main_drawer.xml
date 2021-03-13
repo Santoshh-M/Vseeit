@@ -39,6 +39,7 @@
     <item
         android:id="@+id/nav_my_logout"
         android:icon="@mipmap/logout"
+        android:iconTint="#000000"
         android:title="Logout" />
 
     </group>
