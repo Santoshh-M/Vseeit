@@ -35,8 +35,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:tint="#9e9e9e"
-        app:rippleColor="@color/red"
         android:clickable="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -159,7 +157,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:background="#ff3030"
-        android:padding="16dp"
+        android:padding="8dp"
         android:gravity="right"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -178,11 +176,12 @@
 
         <Button
             android:id="@+id/coupn_redem_btn"
-            android:layout_width="75dp"
-            android:layout_height="30dp"
+            android:layout_width="100dp"
+            android:layout_height="35dp"
             android:textColor="@color/white"
             android:textSize="12sp"
             android:background="@drawable/border_background"
+            android:drawableTint="@color/yellow"
             android:text="Redeem" />
     </LinearLayout>
 

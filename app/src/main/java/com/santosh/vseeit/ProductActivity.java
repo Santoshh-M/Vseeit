@@ -45,7 +45,7 @@ public class ProductActivity extends AppCompatActivity {
             proimgviewpager = findViewById(R.id.pro_images_vwpager);
             viewpagerIndi = findViewById(R.id.viewpager_indicator);
             addtowish = findViewById(R.id.adtowish);
-            productDetailsviewpager = findViewById(R.id.pro_images_vwpager);
+            productDetailsviewpager = findViewById(R.id.product_details_viewpager);
             productDetailsTablayout = findViewById(R.id.product_details_tablayout);
 
         List<Integer> productImgs = new ArrayList<>();

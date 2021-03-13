@@ -127,7 +127,7 @@
         android:fontFamily="@font/fontnew"
         android:text="Qty: 5"
         android:textColor="#000000"
-        app:layout_constraintBottom_toBottomOf="@+id/textView11"
+        app:layout_constraintBottom_toBottomOf="@+id/cutting_price"
         app:layout_constraintStart_toEndOf="@+id/pro_img"
         app:layout_constraintTop_toBottomOf="@+id/cutting_price" />
 
