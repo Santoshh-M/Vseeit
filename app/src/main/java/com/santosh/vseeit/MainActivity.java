@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity
     private static final int CART_FRAGMENT = 1;
     private FrameLayout frameLayout;
     private ImageView actionBarlogo;
-    private static int currentFragment;
+    private static int currentFragment = -1;
     private NavigationView navigationView;
 
     @Override
@@ -77,6 +77,7 @@ public class MainActivity extends AppCompatActivity
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         if (currentFragment == HOME_FRAGMENT){
+            getSupportActionBar().setDisplayShowTitleEnabled(false);
             getMenuInflater().inflate(R.menu.main, menu);
         }
         return true;
@@ -110,7 +111,7 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_my_home) {
-            getSupportActionBar().setDisplayShowTitleEnabled(false);
+
             actionBarlogo.setVisibility(View.VISIBLE);
             invalidateOptionsMenu();
            setFragment(new Homefragment(),HOME_FRAGMENT);
