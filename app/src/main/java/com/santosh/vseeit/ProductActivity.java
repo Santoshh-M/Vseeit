@@ -103,7 +103,6 @@ public class ProductActivity extends AppCompatActivity {
         }
         ///////rating layout
     }
-
     private void setRating(int starposition) {
     for (int s = 0;s < ratenow.getChildCount();s++){
         ImageView strbtn = (ImageView)ratenow.getChildAt(s);

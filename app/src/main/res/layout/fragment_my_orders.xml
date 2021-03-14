@@ -7,7 +7,7 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/my_orders_cycle"
-        android:background="@color/white"
+        android:background="@color/background"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
