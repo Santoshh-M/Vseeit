@@ -1,6 +1,5 @@
 package com.santosh.vseeit;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.Menu;
@@ -25,6 +24,7 @@ public class MainActivity extends AppCompatActivity
 
     private static final int HOME_FRAGMENT = 0;
     private static final int CART_FRAGMENT = 1;
+    private static final int ORDERS_FRAGMENT = 2;
     private FrameLayout frameLayout;
     private ImageView actionBarlogo;
     private static int currentFragment = -1;
@@ -92,52 +92,50 @@ public class MainActivity extends AppCompatActivity
             } else if (id == R.id.main_notification_icon) {
                 return true;
             } else if (id == R.id.main_cart_icon) {
-               mycart();
+               gotoFragment("My Cart",new MyCart(),CART_FRAGMENT);
+
                 return true;
             }
             return super.onOptionsItemSelected(item);
         }
-
-        private void mycart(){
+    private void gotoFragment(String title,Fragment fragment,int fragmentNo) {
         actionBarlogo.setVisibility(View.GONE);
-            getSupportActionBar().setDisplayShowTitleEnabled(true);
-            getSupportActionBar().setTitle("My Cart");
+        getSupportActionBar().setDisplayShowTitleEnabled(true);
+        getSupportActionBar().setTitle(title);
         invalidateOptionsMenu();
-        setFragment(new MyCart(),CART_FRAGMENT);
+        setFragment(fragment, fragmentNo);
+        if (fragmentNo == CART_FRAGMENT) {
             navigationView.getMenu().getItem(4).setChecked(true);
         }
+    }
+
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();
 
         if (id == R.id.nav_my_home) {
-
             actionBarlogo.setVisibility(View.VISIBLE);
             invalidateOptionsMenu();
            setFragment(new Homefragment(),HOME_FRAGMENT);
         } else if (id == R.id.nav_my_order) {
-            Intent loged = new Intent(getApplicationContext(), register.class);
-            startActivity(loged);
-        } else if (id == R.id.nav_my_account) {
-            Toast.makeText(this, "Account", Toast.LENGTH_SHORT).show();
-        }else if (id == R.id.nav_my_rewards) {
-                Intent favo = new Intent(getApplicationContext(), Login.class);
-                startActivity(favo);
+           gotoFragment("My Orders",new MyOrdersFragment(),ORDERS_FRAGMENT);
+        } else if (id == R.id.nav_my_rewards) {
+            Toast.makeText(this, "Under Construction", Toast.LENGTH_SHORT).show();
         } else if (id == R.id.nav_my_cart) {
-            mycart();
+            gotoFragment("My Cart",new MyCart(),CART_FRAGMENT);
         } else if (id == R.id.nav_my_wishlist) {
-            Intent sare = new Intent(getApplicationContext(), Login.class);
-            startActivity(sare);
+            Toast.makeText(this, "Under Construction", Toast.LENGTH_SHORT).show();
+        } else if (id == R.id.nav_my_account) {
+            Toast.makeText(this, "Under Construction ", Toast.LENGTH_SHORT).show();
         } else if (id == R.id.nav_my_logout) {
             finish();
-    }
+        }
         DrawerLayout  drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
         }
-
-    private void setFragment(Fragment fragment,int fragmentNo) {
-        if (fragmentNo != currentFragment) {
+        private void setFragment(Fragment fragment,int fragmentNo) {
+            if (fragmentNo != currentFragment) {
 
             currentFragment = fragmentNo;
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
