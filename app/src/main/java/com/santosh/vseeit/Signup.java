@@ -37,7 +37,6 @@ public class Signup extends Fragment {
     public Signup() {
         // Required empty public constructor
     }
-
     private TextView alreadyHaveanaccount;
     private FrameLayout parentFrameLayout;
 
@@ -83,7 +82,6 @@ public class Signup extends Fragment {
                 setFragment(new Login());
             }
         });
-
         email.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -171,6 +169,14 @@ public class Signup extends Fragment {
                 checkemailandpasswrd();
             }
         });
+        closebtnsignup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(),MainActivity.class);
+                startActivity(intent);
+                getActivity().finish();
+            }
+        });
     }
 
 
@@ -241,7 +247,7 @@ public class Signup extends Fragment {
                                                     signup.setEnabled(true);
                                                     signup.setTextColor(Color.rgb(255,255,255));
                                                     String error = task.getException().getMessage();
-                                                    Toast.makeText(getActivity(), "error", Toast.LENGTH_SHORT).show();
+                                                    Toast.makeText(getActivity(), "Give the valid input", Toast.LENGTH_SHORT).show();
                                                 }
                                                 }
                                             });
@@ -251,7 +257,8 @@ public class Signup extends Fragment {
                                     signup.setEnabled(true);
                                     signup.setTextColor(Color.rgb(255,255,255));
                                     String error = task.getException().getMessage();
-                                    Toast.makeText(getActivity(), "error", Toast.LENGTH_SHORT).show();
+                                    password.setError(error);
+                                    Toast.makeText(getContext(), "Check the given password is 6 character long", Toast.LENGTH_SHORT).show();
                                 }
                             }
                         });

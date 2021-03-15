@@ -1,5 +1,4 @@
 package com.santosh.vseeit;
-
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.Menu;
@@ -19,6 +18,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.navigation.NavigationView;
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener{
 
@@ -54,8 +54,8 @@ public class MainActivity extends AppCompatActivity
         frameLayout = findViewById(R.id.main_framelayout);
         setFragment(new Homefragment(),HOME_FRAGMENT);
     }
-
     boolean doubleBackToExitPressedOnce = false;
+
     @Override
     public void onBackPressed() {
         if (doubleBackToExitPressedOnce) {
@@ -72,7 +72,6 @@ public class MainActivity extends AppCompatActivity
             }
         }, 2000);
     }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -82,7 +81,6 @@ public class MainActivity extends AppCompatActivity
         }
         return true;
     }
-
     @Override
     public boolean onOptionsItemSelected (@NonNull MenuItem item){
 
