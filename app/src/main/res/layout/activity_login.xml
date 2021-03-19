@@ -81,6 +81,7 @@
                 <EditText
                     android:id="@+id/password"
                     android:hint="Password"
+                    android:inputType="textPassword"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp" />
@@ -89,7 +90,7 @@
                     android:id="@+id/forgot_pass"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="end"
+                    andccvroid:layout_gravity="end"
                     android:gravity="end"
                     android:text="Forgot Password"
                     android:textColor="#000" />

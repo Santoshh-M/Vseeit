@@ -5,6 +5,7 @@
     <color name="app_title">#e8ae7c</color>
     <color name="colorAccent">#03DAC5</color>
     <color name="background">#f1f2f6</color>
+    <color name="cyclebg">#d6d6d6</color>
     <color name="white">#FFFFFF</color>
     <color name="yellow">#FBE8A6</color>
     <color name="red">#B71C1C</color>
