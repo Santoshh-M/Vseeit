@@ -90,7 +90,7 @@
                     android:id="@+id/forgot_pass"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    andccvroid:layout_gravity="end"
+                    android:layout_gravity="end"
                     android:gravity="end"
                     android:text="Forgot Password"
                     android:textColor="#000" />

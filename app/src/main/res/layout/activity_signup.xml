@@ -85,12 +85,16 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="10dp"
+                        android:textColorHint="@color/cyclebg"
+                        android:inputType="textPersonName|textNoSuggestions"
                         android:hint="Firstname" />
 
                     <EditText
                         android:id="@+id/input_lastname"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:textColorHint="@color/cyclebg"
+                        android:inputType="textPersonName|textNoSuggestions"
                         android:layout_marginBottom="10dp"
                         android:hint="Lastname" />
 
@@ -98,6 +102,8 @@
                         android:id="@+id/input_email"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:textColorHint="@color/cyclebg"
+                        android:inputType="textEmailAddress|textNoSuggestions"
                         android:layout_marginBottom="10dp"
                         android:hint="Enter email" />
 
@@ -105,6 +111,7 @@
                         android:id="@+id/input_password"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:textColorHint="@color/cyclebg"
                         android:layout_marginBottom="10dp"
                         android:hint="Password"
                         android:inputType="textPassword" />
@@ -114,7 +121,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="10dp"
-                        android:hint="Conform Password"
+                        android:textColorHint="@color/cyclebg"
+                        android:hint="Confirm Password"
                         android:inputType="textPassword" />
 
                 </LinearLayout>
