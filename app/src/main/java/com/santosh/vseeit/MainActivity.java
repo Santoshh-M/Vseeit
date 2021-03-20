@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity
         navigationView.getMenu().getItem(0).setChecked(true);
 
         frameLayout = findViewById(R.id.main_framelayout);
-        setFragment(new Orderdetails(),HOME_FRAGMENT);
+        setFragment(new Homefragment(),HOME_FRAGMENT);
     }
     boolean doubleBackToExitPressedOnce = false;
 

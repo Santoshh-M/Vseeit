@@ -1,5 +1,6 @@
 package com.santosh.vseeit;
 
+import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.view.LayoutInflater;
@@ -50,13 +51,20 @@ holder.setData(resource,title,deliverdate,rating);
         private TextView deliverystatus;
         private LinearLayout ratenow;
 
-        public Viewholder(@NonNull View itemView) {
+        public Viewholder(@NonNull final View itemView) {
             super(itemView);
             orderimg = itemView.findViewById(R.id.order_imagu);
             ordertitle = itemView.findViewById(R.id.order_title);
             orderindi = itemView.findViewById(R.id.order_indicator);
             deliverystatus = itemView.findViewById(R.id.order_deliver_date);
             ratenow = itemView.findViewById(R.id.rate_str_5);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent orderdetails =  new Intent(itemView.getContext(),OrderDetailsActivity.class);
+                    itemView.getContext().startActivity(orderdetails);
+                }
+            });
         }
 
         private void setData(int resource, String title, String deliverydate, int rating) {
