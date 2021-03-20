@@ -2,6 +2,10 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_marginBottom="4dp"
+    android:layout_marginTop="4dp"
+    android:elevation="3dp"
+   android:background="@color/white"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -53,9 +57,9 @@
         android:padding="4dp"
         android:text="Qty: 1"
         android:textColor="#000000"
+        app:layout_constraintBottom_toBottomOf="@+id/ordered_img"
         app:layout_constraintEnd_toStartOf="@+id/ordered_img"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteY="53dp" />
+        tools:ignore="MissingConstraints" />
 
     <View
         android:id="@+id/divider10"

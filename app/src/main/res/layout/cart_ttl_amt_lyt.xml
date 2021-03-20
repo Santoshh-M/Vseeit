@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@color/background"
+    android:background="@color/cyclebg"
     android:elevation="3dp"
     android:layout_marginTop="4dp"
     android:layout_width="match_parent"
@@ -156,13 +156,14 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/happy_shopping"
         android:layout_width="80dp"
         android:layout_height="70dp"
+        android:layout_marginTop="8dp"
         android:layout_marginStart="16dp"
         android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/orderdetailslayout"
-        tools:srcCompat="@tools:sample/backgrounds/scenic" />
+        tools:srcCompat="@drawable/vseeit" />
 </androidx.constraintlayout.widget.ConstraintLayout>

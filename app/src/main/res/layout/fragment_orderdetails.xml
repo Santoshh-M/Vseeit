@@ -12,7 +12,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/background"
-            android:orientation="vertical"/>
+            android:orientation="vertical">
+            <include layout="@layout/order_details_layout"/>
+            <include layout="@layout/shipping_details_only"/>
+            <include layout="@layout/cart_ttl_amt_lyt"/>
+        </LinearLayout>
 
     </ScrollView>
 </FrameLayout>
