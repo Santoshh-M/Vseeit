@@ -82,18 +82,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/divider10"
         app:srcCompat="@drawable/selected_dot"
-        app:tint="@color/background" />
+        app:tint="@color/cyclebg" />
 
     <ProgressBar
         android:id="@+id/ordered_bar"
-        style="?android:attr/progressBarStyleHorizontal"
+        style="@android:style/Widget.ProgressBar.Horizontal"
         android:layout_width="60dp"
         android:layout_height="3dp"
         android:layout_marginStart="9dp"
         android:layout_marginTop="13dp"
         android:progress="100"
-        android:progressBackgroundTint="@color/background"
-        android:progressTint="@color/successgreen"
+        android:progressTint="@color/cyclebg"
         android:rotation="90"
         android:transformPivotX="0dp"
         app:layout_constraintStart_toStartOf="@+id/order_indicator"
@@ -108,7 +107,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ordered_bar"
         app:srcCompat="@drawable/selected_dot"
-        app:tint="@color/background" />
+        app:tint="@color/cyclebg" />
 
     <ProgressBar
         android:id="@+id/packed_order"
@@ -119,7 +118,7 @@
         android:layout_marginTop="13dp"
         android:progress="100"
         android:progressBackgroundTint="@color/cyclebg"
-        android:progressTint="@color/successgreen"
+        android:progressTint="@color/cyclebg"
         android:rotation="90"
         android:transformPivotX="0dp"
         app:layout_constraintStart_toStartOf="@+id/packed_dot"
@@ -134,7 +133,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/packed_order"
         app:srcCompat="@drawable/selected_dot"
-        app:tint="@color/background" />
+        app:tint="@color/cyclebg" />
 
     <ProgressBar
         android:id="@+id/shipped_bar"
@@ -145,7 +144,7 @@
         android:layout_marginTop="13dp"
         android:progress="100"
         android:progressBackgroundTint="@color/cyclebg"
-        android:progressTint="@color/successgreen"
+        android:progressTint="@color/cyclebg"
         android:rotation="90"
         android:transformPivotX="0dp"
         app:layout_constraintStart_toStartOf="@+id/shipping_dot"
@@ -160,7 +159,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/shipped_bar"
         app:srcCompat="@drawable/selected_dot"
-        app:tint="@color/background" />
+        app:tint="@color/cyclebg" />
 
     <TextView
         android:id="@+id/order_txt"
