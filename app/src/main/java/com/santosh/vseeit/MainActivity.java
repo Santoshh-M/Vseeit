@@ -1,6 +1,6 @@
 package com.santosh.vseeit;
+
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -25,6 +25,8 @@ public class MainActivity extends AppCompatActivity
     private static final int HOME_FRAGMENT = 0;
     private static final int CART_FRAGMENT = 1;
     private static final int ORDERS_FRAGMENT = 2;
+    private static final int WISHLIST_FRAGMENT = 3;
+
     private FrameLayout frameLayout;
     private ImageView actionBarlogo;
     private static int currentFragment = -1;
@@ -58,19 +60,16 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
-        if (doubleBackToExitPressedOnce) {
-            super.onBackPressed();
-            return;
-        }
-        this.doubleBackToExitPressedOnce = true;
-        Toast.makeText(this, "Please hit BACK button again to exit", Toast.LENGTH_SHORT).show();
+       DrawerLayout draw = (DrawerLayout) findViewById(R.id.drawer_layout);
+       if (draw.isDrawerOpen(GravityCompat.START)){
+           draw.closeDrawer(GravityCompat.START);
+       }else {
+           if (currentFragment == HOME_FRAGMENT){
+               super.onBackPressed();
+           }else{
 
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                doubleBackToExitPressedOnce=false;
-            }
-        }, 2000);
+           }
+       }
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -91,7 +90,10 @@ public class MainActivity extends AppCompatActivity
                 return true;
             } else if (id == R.id.main_cart_icon) {
                gotoFragment("My Cart",new MyCart(),CART_FRAGMENT);
-
+                actionBarlogo.setVisibility(View.VISIBLE);
+                invalidateOptionsMenu();
+                setFragment(new Homefragment(),HOME_FRAGMENT);
+                navigationView.getMenu().getItem(0).setChecked(true);
                 return true;
             }
             return super.onOptionsItemSelected(item);
@@ -122,7 +124,7 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_my_cart) {
             gotoFragment("My Cart",new MyCart(),CART_FRAGMENT);
         } else if (id == R.id.nav_my_wishlist) {
-            Toast.makeText(this, "Under Construction", Toast.LENGTH_SHORT).show();
+             gotoFragment("My Wishlist",new MywishlistFragment(),WISHLIST_FRAGMENT);
         } else if (id == R.id.nav_my_account) {
             Toast.makeText(this, "Under Construction ", Toast.LENGTH_SHORT).show();
         } else if (id == R.id.nav_my_logout) {

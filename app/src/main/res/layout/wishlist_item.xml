@@ -42,7 +42,7 @@
         app:tint="#8000ff" />
 
     <TextView
-        android:id="@+id/textView10"
+        android:id="@+id/wish_coupn_txt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -155,7 +155,7 @@
         app:srcCompat="@drawable/delete" />
 
     <View
-        android:id="@+id/divider14"
+        android:id="@+id/price_cut"
         android:layout_width="0dp"
         android:layout_height="1dp"
         android:background="?android:attr/listDivider"
