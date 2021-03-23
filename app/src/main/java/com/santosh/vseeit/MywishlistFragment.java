@@ -29,10 +29,10 @@ public class MywishlistFragment extends Fragment {
         wishcycle.setLayoutManager(linearLayoutManager);
 
         List<Wishlistmodel> wishlistmodelList = new ArrayList<>();
-        wishlistmodelList.add(new Wishlistmodel(R.drawable.sam,"Samsung M40",1,"3",150,"Rs. 29,999/-","Rs. 35,854/-","Cash on Delivery is avaliable"));
-        wishlistmodelList.add(new Wishlistmodel(R.drawable.sam,"Samsung M40",0,"3",150,"Rs. 29,999/-","Rs. 35,854/-","Cash on Delivery is avaliable"));
-        wishlistmodelList.add(new Wishlistmodel(R.drawable.sam,"Samsung M40",2,"3",150,"Rs. 29,999/-","Rs. 35,854/-","Cash on Delivery is avaliable"));
-        wishlistmodelList.add(new Wishlistmodel(R.drawable.sam,"Samsung M40",3,"3",150,"Rs. 29,999/-","Rs. 35,854/-","Cash on Delivery is avaliable"));
+        wishlistmodelList.add(new Wishlistmodel(R.drawable.sam,"Samsung M40",1,"4",150,"Rs. 29,999/-","Rs. 35,854/-","Cash on Delivery is avaliable"));
+        wishlistmodelList.add(new Wishlistmodel(R.drawable.sam,"Samsung M40",1,"5",150,"Rs. 29,999/-","Rs. 35,854/-","Cash on Delivery is avaliable"));
+        wishlistmodelList.add(new Wishlistmodel(R.drawable.sam,"Samsung M40",2,"2.6",150,"Rs. 29,999/-","Rs. 35,854/-","Cash on Delivery is avaliable"));
+        wishlistmodelList.add(new Wishlistmodel(R.drawable.sam,"Samsung M40",3,"2.8",150,"Rs. 29,999/-","Rs. 35,854/-","Cash on Delivery is avaliable"));
         WishlistAdapter wishlistAdapter = new WishlistAdapter(wishlistmodelList);
         wishcycle.setAdapter(wishlistAdapter);
         wishlistAdapter.notifyDataSetChanged();

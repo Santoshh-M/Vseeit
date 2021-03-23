@@ -76,7 +76,7 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
             deletebtn = itemView.findViewById(R.id.delete_btn);
 
         }
-       private void setData(int resource, String title, int freecouponNo, String averageRage, int TotalRatingNo, String price, String cuttedpriceValue, String paymentNo){
+       private void setData(int resource, String title, int freecouponNo, String averageRate, int TotalRatingNo, String price, String cuttedpriceValue, String paymentNo){
             proimg.setImageResource(resource);
             protitle.setText(title);
             if (freecouponNo != 0) {
@@ -90,7 +90,7 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
                 couponicon.setVisibility(View.INVISIBLE);
                 couponicon.setVisibility(View.INVISIBLE);
             }
-            rating.setText(averageRage);
+            rating.setText(averageRate);
             ttlrating.setText(TotalRatingNo+"(ratings)");
             proprice.setText(price);
             cutprice.setText(cuttedpriceValue);

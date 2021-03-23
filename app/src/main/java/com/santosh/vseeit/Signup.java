@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.InputFilter;
+import android.text.Spanned;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -50,6 +52,7 @@ public class Signup extends Fragment {
     private Button signup;
     private ProgressBar progress;
     private FirebaseAuth firebaseAuth;
+    private String blockCharacterSet = "~#^|$%&*!.,[{]}}";
     private String emailpattern="^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
 
     @Override
@@ -82,6 +85,8 @@ public class Signup extends Fragment {
                 setFragment(new Login());
             }
         });
+        firstname.setFilters(new InputFilter[] { filter });
+        lastname.setFilters(new InputFilter[] {filter});
         email.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -187,6 +192,16 @@ public class Signup extends Fragment {
         fragmentTransaction.commit();
 
     }
+    private InputFilter filter = new InputFilter() {
+        @Override
+        public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
+            if (source != null && blockCharacterSet.contains(("" + source))) {
+                return "";
+            }
+            return null;
+        }
+    };
+
     private void checkInputs() {
         if (!TextUtils.isEmpty(email.getText())) {
             if (!TextUtils.isEmpty(firstname.getText())) {

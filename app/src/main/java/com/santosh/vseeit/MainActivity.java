@@ -1,6 +1,7 @@
 package com.santosh.vseeit;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -66,8 +67,23 @@ public class MainActivity extends AppCompatActivity
        }else {
            if (currentFragment == HOME_FRAGMENT){
                super.onBackPressed();
+               if (doubleBackToExitPressedOnce) {
+                   super.onBackPressed();
+                   return;
+               }
+               this.doubleBackToExitPressedOnce = true;
+               Toast.makeText(this, "Please hit BACK button again to exit", Toast.LENGTH_SHORT).show();
+               new Handler().postDelayed(new Runnable() {
+                   @Override
+                   public void run() {
+                       doubleBackToExitPressedOnce=false;
+                   }
+               }, 2000);
            }else{
-
+               actionBarlogo.setVisibility(View.VISIBLE);
+               invalidateOptionsMenu();
+               setFragment(new Homefragment(),HOME_FRAGMENT);
+               navigationView.getMenu().getItem(0).setChecked(true);
            }
        }
     }
@@ -90,10 +106,6 @@ public class MainActivity extends AppCompatActivity
                 return true;
             } else if (id == R.id.main_cart_icon) {
                gotoFragment("My Cart",new MyCart(),CART_FRAGMENT);
-                actionBarlogo.setVisibility(View.VISIBLE);
-                invalidateOptionsMenu();
-                setFragment(new Homefragment(),HOME_FRAGMENT);
-                navigationView.getMenu().getItem(0).setChecked(true);
                 return true;
             }
             return super.onOptionsItemSelected(item);
@@ -105,7 +117,7 @@ public class MainActivity extends AppCompatActivity
         invalidateOptionsMenu();
         setFragment(fragment, fragmentNo);
         if (fragmentNo == CART_FRAGMENT) {
-            navigationView.getMenu().getItem(4).setChecked(true);
+            navigationView.getMenu().getItem(3).setChecked(true);
         }
     }
 
