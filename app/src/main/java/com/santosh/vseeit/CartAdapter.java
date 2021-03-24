@@ -57,7 +57,8 @@ public class CartAdapter extends RecyclerView.Adapter {
             String proprice = cartitemModelList.get(position).getProductprice();
             String cutprice = cartitemModelList.get(position).getCuttedprice();
             int ofrapplied = cartitemModelList.get(position).getOffrapplied();
-            ((cartItemViewholder)holder).setItemDetails(resource,title,frecoupon,proprice,cutprice,ofrapplied);
+            int couponapplied = cartitemModelList.get(position).getCoupnapplied();
+            ((cartItemViewholder)holder).setItemDetails(resource,title,frecoupon,proprice,cutprice,ofrapplied,couponapplied);
         break;
         case CartitemModel.TOTAL_AMOUNT:
             String ttlitm = cartitemModelList.get(position).getTotalItems();
@@ -94,20 +95,21 @@ public class cartItemViewholder extends RecyclerView.ViewHolder {
         public cartItemViewholder(@NonNull View itemView) {
             super(itemView);
             proimg = itemView.findViewById(R.id.pro_img);
-            productprice = itemView.findViewById(R.id.pro_price);
+            productprice = itemView.findViewById(R.id.prop_price);
             protitle = itemView.findViewById(R.id.pro_title);
             proqtty = itemView.findViewById(R.id.pro_quantity);
             freecouponicon = itemView.findViewById(R.id.free_coupon);
             freecoupon = itemView.findViewById(R.id.tv_coupon);
-            cuttedprice = itemView.findViewById(R.id.cutted_price);
+            cuttedprice = itemView.findViewById(R.id.cutting_price);
             offrapplied = itemView.findViewById(R.id.offers_spl);
             coupnapplied = itemView.findViewById(R.id.couponapplied);
 
-
         }
-        private void setItemDetails(int resource, String title, int freecouponNo, String productpriceText, String cuttedpriceText, int offrappliedNo) {
+        private void setItemDetails(int resource, String title, int freecouponNo, String productpriceText, String cuttedpriceText, int offrappliedNo, int couponapplied) {
             proimg.setImageResource(resource);
             protitle.setText(title);
+            productprice.setText(productpriceText);
+            cuttedprice.setText(cuttedpriceText);
             if (freecouponNo > 0) {
                 freecouponicon.setVisibility(View.VISIBLE);
                 freecoupon.setVisibility(View.VISIBLE);
@@ -115,13 +117,10 @@ public class cartItemViewholder extends RecyclerView.ViewHolder {
                         freecoupon.setText("Free " + freecouponNo + " Coupon");
                     }   else {
                         freecoupon.setText("Free " + freecouponNo + " Coupon");
-
                     }
             }else {
                 freecouponicon.setVisibility(View.INVISIBLE);
                 freecoupon.setVisibility(View.INVISIBLE);
-                productprice.setText(productpriceText);
-                cuttedprice.setText(cuttedpriceText);
             }
                 if (offrappliedNo > 0){
                     offrapplied.setVisibility(View.VISIBLE);
@@ -129,13 +128,19 @@ public class cartItemViewholder extends RecyclerView.ViewHolder {
                 } else {
                     offrapplied.setVisibility(View.INVISIBLE);
                 }
+            if (couponapplied > 0){
+                coupnapplied.setVisibility(View.VISIBLE);
+                coupnapplied.setText(couponapplied + " Coupons are applied");
+            } else {
+                coupnapplied.setVisibility(View.INVISIBLE);
+            }
 
             }
         }
 
        public class cartTotalAmountviewholder extends RecyclerView.ViewHolder {
-        private TextView totalitms;
-        private TextView totalitmprice;
+            private TextView totalitms;
+            private TextView totalitmprice;
             private TextView deliverycrg;
             private TextView totalamt;
             private TextView saveamt;

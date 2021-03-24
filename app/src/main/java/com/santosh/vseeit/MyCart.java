@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
-
 public class MyCart extends Fragment {
 
     public MyCart() {
@@ -30,10 +29,10 @@ public class MyCart extends Fragment {
     cartcycle.setLayoutManager(layoutManager);
 
         List<CartitemModel> cartitemModelList = new ArrayList<>();
-        cartitemModelList.add(new CartitemModel(0,R.drawable.phone,"Iphone 12","Rs.49,999/-","Rs.4,999/-",2,1,0,0));
-        cartitemModelList.add(new CartitemModel(0,R.drawable.phone,"Iphone 12","Rs.49,999/-","Rs.4,999/-",2,2,0,0));
-        cartitemModelList.add(new CartitemModel(0,R.drawable.phone,"Iphone 12","Rs.49,999/-","Rs.4,999/-",2,3,0,0));
-        cartitemModelList.add(new CartitemModel( 1, "Price (3 items)","Rs.149,997/-","Free","Rs.16,997/-","599"));
+        cartitemModelList.add(new CartitemModel(0,R.drawable.iph,"Iphone 12 (GOLD)","Rs.80,999/-","Rs.83,999/-",2,1,1,2));
+        cartitemModelList.add(new CartitemModel(0,R.drawable.sam,"Samsung M40","Rs.69,999/-","Rs.71,999/-",5,2,3,1));
+        cartitemModelList.add(new CartitemModel(0,R.drawable.one,"One Plus","Rs.29,999/-","Rs.34,999/-",4,3,5,4));
+        cartitemModelList.add(new CartitemModel( 1, "Price (3 items)","Rs.149,997/-","Free","Rs.149,997/-","You saved Rs.9999/- on this order"));
 
         CartAdapter cartAdapter = new CartAdapter(cartitemModelList);
         cartcycle.setAdapter(cartAdapter);

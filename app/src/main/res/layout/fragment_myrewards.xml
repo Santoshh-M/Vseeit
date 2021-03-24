@@ -4,9 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#d6d6d6"
     tools:context=".Myrewards">
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/reward_cycle"
+        android:background="@drawable/reward_gradient"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 

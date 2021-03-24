@@ -56,7 +56,7 @@
         app:layout_constraintTop_toBottomOf="@+id/pro_title" />
 
     <TextView
-        android:id="@+id/pro_price"
+        android:id="@+id/prop_price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -77,13 +77,13 @@
         android:textSize="12sp"
         android:fontFamily="@font/fontnew"
         android:text="Rs.79,999"
-        app:layout_constraintBottom_toBottomOf="@+id/pro_price"
-        app:layout_constraintEnd_toStartOf="@+id/pro_price" />
+        app:layout_constraintBottom_toBottomOf="@+id/prop_price"
+        app:layout_constraintEnd_toStartOf="@+id/prop_price" />
 
     <View
         android:id="@+id/divider6"
         android:layout_width="0dp"
-        android:layout_height="1dp"
+        android:layout_height="2dp"
         android:background="?android:attr/listDivider"
         app:layout_constraintBottom_toBottomOf="@+id/cutting_price"
         app:layout_constraintEnd_toEndOf="@+id/cutting_price"
@@ -100,7 +100,7 @@
         android:text="Offers Applied"
         android:textColor="@color/successgreen"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pro_price" />
+        app:layout_constraintTop_toBottomOf="@+id/prop_price" />
 
     <TextView
         android:id="@+id/couponapplied"
