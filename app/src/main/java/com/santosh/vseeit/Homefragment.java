@@ -75,7 +75,12 @@ public class Homefragment extends Fragment {
         horizontalProductModelList.add(new HorizontalProductModel(R.drawable.sam,"Samsung","Ram 4GB / 6GB ", "Rs. 13,999/-"));
         horizontalProductModelList.add(new HorizontalProductModel(R.drawable.one,"OnePlus","5G Phone", "Rs. 27,999/-"));
         horizontalProductModelList.add(new HorizontalProductModel(R.drawable.iph,"Iphone","SD 650 process", "Rs. 50000/-"));
-        horizontalProductModelList.add(new HorizontalProductModel(R.drawable.phone,"Iphone","SD 650 process", "Rs. 99,999/-"));
+        horizontalProductModelList.add(new HorizontalProductModel(R.drawable.phone,"Redmi 9 Pro Max","SD 650 process", "Rs. 99,999/-"));
+        horizontalProductModelList.add(new HorizontalProductModel(R.drawable.sam,"Samsung","Ram 4GB / 6GB ", "Rs. 13,999/-"));
+        horizontalProductModelList.add(new HorizontalProductModel(R.drawable.one,"OnePlus","5G Phone", "Rs. 27,999/-"));
+        horizontalProductModelList.add(new HorizontalProductModel(R.drawable.iph,"Iphone","SD 650 process", "Rs. 50000/-"));
+        horizontalProductModelList.add(new HorizontalProductModel(R.drawable.iph,"Iphone","SD 650 process", "Rs. 50000/-"));
+        horizontalProductModelList.add(new HorizontalProductModel(R.drawable.iph,"Iphone","SD 650 process", "Rs. 50000/-"));
         ////////Horizontal_view
 
         //////////

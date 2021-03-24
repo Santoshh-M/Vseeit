@@ -15,11 +15,14 @@ import java.util.List;
 
 public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHolder> {
 
-    public WishlistAdapter(List<Wishlistmodel> wishlistmodelList) {
+    private List<Wishlistmodel> wishlistmodelList;
+    private Boolean wishlist;
+
+    public WishlistAdapter(List<Wishlistmodel> wishlistmodelList, Boolean wishlist) {
         this.wishlistmodelList = wishlistmodelList;
+        this.wishlist = wishlist;
     }
 
-    private List<Wishlistmodel> wishlistmodelList;
 
     @NonNull
     @Override
@@ -95,6 +98,12 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
             proprice.setText(price);
             cutprice.setText(cuttedpriceValue);
             paymentmethod.setText(paymentNo);
+            if (wishlist){
+                deletebtn.setVisibility(View.VISIBLE);
+            }else{
+                deletebtn.setVisibility(View.GONE);
+
+            }
             deletebtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

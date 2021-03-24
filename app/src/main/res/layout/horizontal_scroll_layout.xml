@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/slider_background"
     android:layout_margin="8dp"
+    android:paddingTop="8dp"
     android:paddingBottom="8dp"
     android:elevation="3dp"
     android:layout_width="match_parent"
@@ -10,14 +11,18 @@
 
     <Button
         android:id="@+id/horiz_scr_lay_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="35dp"
         android:layout_marginEnd="8dp"
+        android:textColor="@color/white"
+        android:drawableEnd="@drawable/arrow"
+        android:textAllCaps="false"
+        android:textSize="9sp"
+        android:textStyle="bold"
         android:fontFamily="@font/fontnew"
-        android:textColor="@color/app_title"
-        android:textSize="12sp"
-        android:text="View all"
-        android:background="@color/colorPrimaryDark"
+        android:drawableTint="@color/white"
+        android:text="View All"
+        android:background="@drawable/slider_background"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -37,6 +42,8 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/horiz_scr_lay_recyclerview"
+        android:layout_marginTop="4dp"
+        android:layout_marginStart="4dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
