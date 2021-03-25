@@ -53,6 +53,9 @@ dependencies {
     //Drawer layout
     implementation 'androidx.drawerlayout:drawerlayout:1.1.0'
 
+    //Grid layout
+    implementation 'androidx.gridlayout:gridlayout:1.0.0'
+
     //Firebase
     implementation 'com.google.firebase:firebase-analytics:17.5.0'
     implementation 'com.google.firebase:firebase-auth:19.3.2'

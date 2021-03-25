@@ -1,5 +1,6 @@
 package com.santosh.vseeit;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -108,6 +109,14 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
                 @Override
                 public void onClick(View v) {
                     Toast.makeText(itemView.getContext(), "Deleted", Toast.LENGTH_SHORT).show();
+                }
+            });
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent productDetails = new Intent(itemView.getContext(),ProductActivity.class);
+                    itemView.getContext().startActivity(productDetails);
                 }
             });
         }

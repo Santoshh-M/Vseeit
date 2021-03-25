@@ -47,29 +47,21 @@ public class Homefragment extends Fragment {
         categoryrecyclerView.setAdapter(categoryAdapter);
         categoryAdapter.notifyDataSetChanged();
 
-        //Banner slider
+        /* Banner slider */
         List<SliderModel>sliderModelList = new ArrayList<SliderModel>();
-
-        sliderModelList.add(new SliderModel(R.drawable.splashscreen,"#ffffff"));
-        sliderModelList.add(new SliderModel(R.drawable.post,"#FFEF6C00"));
         sliderModelList.add(new SliderModel(R.drawable.email_green,"#ffffff"));
-
         sliderModelList.add(new SliderModel(R.drawable.ban,"#ffffff"));
         sliderModelList.add(new SliderModel(R.drawable.gro,"#ffffff"));
         sliderModelList.add(new SliderModel(R.drawable.nad,"#f59204"));
         sliderModelList.add(new SliderModel(R.mipmap.app_icon,"#1794c8"));
         sliderModelList.add(new SliderModel(R.drawable.vseeit,"#ffe50a"));
         sliderModelList.add(new SliderModel(R.drawable.splashscreen,"#ffffff"));
-
         sliderModelList.add(new SliderModel(R.drawable.forgotpass,"#ffffff"));
-        sliderModelList.add(new SliderModel(R.drawable.email_green,"#ffffff"));
-        sliderModelList.add(new SliderModel(R.drawable.mail,"#000000"));
-        //Banner slider
+
+        /* Banner slider */
 
 
-        ////////Horizontal_view
-
-
+        //////Horizontal_view
         List<HorizontalProductModel> horizontalProductModelList = new ArrayList<>();
         horizontalProductModelList.add(new HorizontalProductModel(R.drawable.phone,"Redmi","SD 730G processor", "Rs. 16,999/-"));
         horizontalProductModelList.add(new HorizontalProductModel(R.drawable.sam,"Samsung","Ram 4GB / 6GB ", "Rs. 13,999/-"));
@@ -98,6 +90,7 @@ public class Homefragment extends Fragment {
         homePagemodelList.add(new HomePagemodel(3,"Exclusive deals",horizontalProductModelList));
         homePagemodelList.add(new HomePagemodel(2,"Deals of the Day",horizontalProductModelList));
         homePagemodelList.add(new HomePagemodel(1,R.drawable.strip,"FFEF6C00"));
+
         HomePageAdapter adapter = new HomePageAdapter(homePagemodelList);
         test.setAdapter(adapter);
         adapter.notifyDataSetChanged();

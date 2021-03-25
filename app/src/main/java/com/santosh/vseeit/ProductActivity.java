@@ -1,5 +1,6 @@
 package com.santosh.vseeit;
 
+import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -20,6 +21,8 @@ import com.google.android.material.tabs.TabLayout;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.santosh.vseeit.MainActivity.showCart;
+
 public class ProductActivity extends AppCompatActivity {
     private ViewPager proimgviewpager;
     private TabLayout viewpagerIndi;
@@ -32,6 +35,8 @@ public class ProductActivity extends AppCompatActivity {
     /////rating layout
     private static boolean ALREADY_ADDED_TO_WISH = false;
     private FloatingActionButton addtowish;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -130,6 +135,9 @@ public class ProductActivity extends AppCompatActivity {
             return true;
         }
         else if (id == R.id.main_cart_icon) {
+            Intent cartint = new Intent(ProductActivity.this,MainActivity.class);
+            showCart = true;
+            startActivity(cartint);
             return true;
         }
         return super.onOptionsItemSelected(item);

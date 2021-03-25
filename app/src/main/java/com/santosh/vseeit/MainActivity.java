@@ -27,10 +27,12 @@ public class MainActivity extends AppCompatActivity
     private static final int ORDERS_FRAGMENT = 2;
     private static final int WISHLIST_FRAGMENT = 3;
     private static final int REWARDS_FRAGMENT = 4;
+    private static final int ACCOUNT_FRAGMENT = 5;
+    public static boolean showCart = false;
 
     private FrameLayout frameLayout;
     private ImageView actionBarlogo;
-    private static int currentFragment = -1;
+    private int currentFragment = -1;
     private NavigationView navigationView;
     private Toolbar toolbar;
 
@@ -46,17 +48,23 @@ public class MainActivity extends AppCompatActivity
 
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.addDrawerListener(toggle);
-        toggle.syncState();
 
         navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.getMenu().getItem(0).setChecked(true);
 
         frameLayout = findViewById(R.id.main_framelayout);
-        setFragment(new Homefragment(), HOME_FRAGMENT);
+        if (showCart) {
+            drawer.setDrawerLockMode(1);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            gotoFragment("My Cart",new MyCart(),-2);
+        } else {
+            ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                    this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+            drawer.addDrawerListener(toggle);
+            toggle.syncState();
+            setFragment(new Homefragment(), HOME_FRAGMENT);
+        }
     }
     @Override
     public void onBackPressed() {
@@ -65,12 +73,18 @@ public class MainActivity extends AppCompatActivity
             draw.closeDrawer(GravityCompat.START);
         } else {
             if (currentFragment == HOME_FRAGMENT) {
+                currentFragment = -1;
                 super.onBackPressed();
             } else {
-                actionBarlogo.setVisibility(View.VISIBLE);
-                invalidateOptionsMenu();
-                setFragment(new Homefragment(), HOME_FRAGMENT);
-                navigationView.getMenu().getItem(0).setChecked(true);
+                if (showCart) {
+                showCart = false;
+                finish();
+                } else {
+                    actionBarlogo.setVisibility(View.VISIBLE);
+                    invalidateOptionsMenu();
+                    setFragment(new Homefragment(), HOME_FRAGMENT);
+                    navigationView.getMenu().getItem(0).setChecked(true);
+                }
             }
         }
     }
@@ -96,6 +110,12 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.main_cart_icon) {
             gotoFragment("My Cart", new MyCart(), CART_FRAGMENT);
             return true;
+        }else if (id == android.R.id.home){
+            if (showCart){
+                showCart = false;
+                finish();
+                return true;
+            }
         }
         return super.onOptionsItemSelected(item);
     }

@@ -17,7 +17,6 @@ public class OrderDetailsActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         getSupportActionBar().setTitle("Order details");
-        getSupportActionBar().setCustomView(R.font.fontnew);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
