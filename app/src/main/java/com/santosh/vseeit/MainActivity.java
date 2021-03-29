@@ -1,9 +1,13 @@
 package com.santosh.vseeit;
 
+import android.app.Dialog;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -108,7 +112,25 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.main_notification_icon) {
             return true;
         } else if (id == R.id.main_cart_icon) {
-            gotoFragment("My Cart", new MyCart(), CART_FRAGMENT);
+            Dialog signin = new Dialog(this);
+            signin.setContentView(R.layout.dialog_signinup);
+            signin.getWindow().addFlags(WindowManager.LayoutParams.FLAG_BLUR_BEHIND);
+            signin.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.MATCH_PARENT);
+            Button sin = signin.findViewById(R.id.dia_in_btn);
+            Button sup = signin.findViewById(R.id.dia_up_btn);
+            sin.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                }
+            });
+            sup.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                }
+            });
+//            gotoFragment("My Cart", new MyCart(), CART_FRAGMENT);
             return true;
         }else if (id == android.R.id.home){
             if (showCart){
