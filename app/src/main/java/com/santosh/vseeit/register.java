@@ -11,17 +11,24 @@ import androidx.fragment.app.FragmentTransaction;
 public class register extends AppCompatActivity {
 
     private FrameLayout frameLayout;
+
     public static boolean onResetPasswordFragment = false;
+    public static boolean setsignup = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        frameLayout = findViewById(R.id.registerlayout);
-        setDefaultFragment(new Login());
-    }
 
+        frameLayout = findViewById(R.id.registerlayout);
+        if (setsignup) {
+
+            setDefaultFragment(new Login());
+        } else {
+            setDefaultFragment(new Signup());
+        }
+    }
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK){

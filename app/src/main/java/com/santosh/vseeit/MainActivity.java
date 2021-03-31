@@ -1,6 +1,7 @@
 package com.santosh.vseeit;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -23,6 +24,8 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.navigation.NavigationView;
 
+import static com.santosh.vseeit.register.setsignup;
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -32,6 +35,7 @@ public class MainActivity extends AppCompatActivity
     private static final int WISHLIST_FRAGMENT = 3;
     private static final int REWARDS_FRAGMENT = 4;
     private static final int ACCOUNT_FRAGMENT = 5;
+
     public static boolean showCart = false;
 
     private FrameLayout frameLayout;
@@ -112,25 +116,33 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.main_notification_icon) {
             return true;
         } else if (id == R.id.main_cart_icon) {
-            Dialog signin = new Dialog(this);
+          final Dialog signin = new Dialog(this);
             signin.setContentView(R.layout.dialog_signinup);
             signin.getWindow().addFlags(WindowManager.LayoutParams.FLAG_BLUR_BEHIND);
-            signin.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.MATCH_PARENT);
+            signin.setCancelable(true);
+            signin.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
             Button sin = signin.findViewById(R.id.dia_in_btn);
             Button sup = signin.findViewById(R.id.dia_up_btn);
+
+            final Intent regIntent = new Intent(MainActivity.this,register.class);
             sin.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
+                    signin.dismiss();
+                    setsignup = false;
+                    startActivity(regIntent);
                 }
             });
             sup.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
+                    signin.dismiss();
+                    setsignup = true;
+                    startActivity(regIntent);
                 }
             });
 //            gotoFragment("My Cart", new MyCart(), CART_FRAGMENT);
+            signin.show();
             return true;
         }else if (id == android.R.id.home){
             if (showCart){
