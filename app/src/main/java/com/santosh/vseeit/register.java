@@ -23,10 +23,10 @@ public class register extends AppCompatActivity {
 
         frameLayout = findViewById(R.id.registerlayout);
         if (setsignup) {
-
-            setDefaultFragment(new Login());
-        } else {
+            setsignup = false;
             setDefaultFragment(new Signup());
+        } else {
+            setDefaultFragment(new Login());
         }
     }
     @Override

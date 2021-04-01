@@ -7,7 +7,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -118,7 +117,6 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.main_cart_icon) {
           final Dialog signin = new Dialog(this);
             signin.setContentView(R.layout.dialog_signinup);
-            signin.getWindow().addFlags(WindowManager.LayoutParams.FLAG_BLUR_BEHIND);
             signin.setCancelable(true);
             signin.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
             Button sin = signin.findViewById(R.id.dia_in_btn);

@@ -36,7 +36,7 @@ public class Homefragment extends Fragment {
         category_modelList.add(new Category_model("link", "Home"));
         category_modelList.add(new Category_model("link", "Electronics"));
         category_modelList.add(new Category_model("link", "Appliances"));
-        category_modelList.add(new Category_model("link", "Furniture"));
+        category_modelList.add(new Category_model("link", "Furnitures"));
         category_modelList.add(new Category_model("link", "Fashion"));
         category_modelList.add(new Category_model("link", "Food"));
         category_modelList.add(new Category_model("link", "Toys"));
