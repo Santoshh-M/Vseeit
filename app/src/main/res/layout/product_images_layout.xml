@@ -176,7 +176,7 @@
             android:textColor="@color/white" />
 
         <Button
-            android:id="@+id/coupn_redem_btn"
+            android:id="@+id/coupn_red_btn"
             android:layout_width="100dp"
             android:layout_height="35dp"
             android:textColor="@color/white"

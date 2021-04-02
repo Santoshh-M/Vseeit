@@ -2,7 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <TextView
         android:id="@+id/textView9"
@@ -14,16 +14,17 @@
         android:fontFamily="@font/fontnew"
         android:text="Your Coupon"
         android:textColor="#000000"
-        android:textSize="10sp"
+        android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/recyclerView"
+        app:layout_constraintBottom_toTopOf="@+id/coupon_cycle"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/imageView4"
+        android:id="@+id/toggle_recycleview"
         android:layout_width="30dp"
         android:layout_height="30dp"
+        android:padding="4dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -31,17 +32,18 @@
         app:srcCompat="@drawable/menu" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
+        android:id="@+id/coupon_cycle"
         android:layout_width="430dp"
         android:layout_height="200dp"
-        android:background="@drawable/reward_gradient"
         android:layout_marginTop="8dp"
+        android:background="@drawable/reward_gradient"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView4" />
+        app:layout_constraintTop_toBottomOf="@+id/toggle_recycleview" />
 
     <LinearLayout
-        android:id="@+id/linearLayout7"
+        android:id="@+id/selected_coupon"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -49,9 +51,9 @@
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recyclerView">
+        app:layout_constraintTop_toBottomOf="@+id/coupon_cycle">
 
-        <include layout="@layout/reward_item" />
+        <include layout="@layout/mini_rewards_item" />
     </LinearLayout>
 
     <TextView
@@ -63,63 +65,72 @@
         android:layout_weight="1"
         android:fontFamily="@font/fontnew"
         android:text="Original Price"
-        android:textStyle="bold"
-        android:textSize="12sp"
         android:textColor="#000000"
+        android:textSize="12sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/imageView5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout7" />
+        app:layout_constraintTop_toBottomOf="@+id/selected_coupon" />
 
     <ImageView
         android:id="@+id/imageView5"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="24dp"
         android:layout_weight="1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recyclerView"
+        app:layout_constraintTop_toTopOf="@+id/textView11"
         app:srcCompat="@drawable/magic" />
 
     <TextView
         android:id="@+id/textView11"
-        android:layout_width="wrap_content"
+        android:layout_width="120dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="24dp"
         android:layout_weight="1"
         android:drawableEnd="@drawable/magic_star"
         android:fontFamily="@font/fontnew"
         android:text="Price after coupon redemption"
+        android:textAlignment="center"
         android:textColor="#000000"
         android:textSize="12sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/imageView5"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout7" />
+        app:layout_constraintTop_toBottomOf="@+id/selected_coupon" />
 
     <TextView
         android:id="@+id/origin_price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="Rs. 49999/-"
         android:fontFamily="@font/fontnew"
+        android:text="Rs. 49999/-"
         android:textColor="#000000"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView5"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/cupn_prs"
         app:layout_constraintEnd_toStartOf="@+id/imageView5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView10" />
+        app:layout_constraintTop_toTopOf="@+id/cupn_prs" />
 
     <TextView
-        android:id="@+id/Cupn_prs"
+        android:id="@+id/cupn_prs"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:layout_weight="1"
-        android:text="TextView"
         android:fontFamily="@font/fontnew"
+        android:text="Rs. 39999/-"
         android:textColor="#000000"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView5"
+        android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/imageView5"
         app:layout_constraintTop_toBottomOf="@+id/textView11" />
@@ -128,12 +139,13 @@
         android:id="@+id/somedetails"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:layout_weight="1"
-        android:text="TextView"
         android:fontFamily="@font/fontnew"
+        android:text=" Make sure to apply the coupon in your cart"
         android:textColor="#000000"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/imageView5"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView5" />
 

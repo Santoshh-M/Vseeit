@@ -1,5 +1,6 @@
 package com.santosh.vseeit;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
@@ -7,12 +8,17 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -26,6 +32,16 @@ import static com.santosh.vseeit.MainActivity.showCart;
 public class ProductActivity extends AppCompatActivity {
     private ViewPager proimgviewpager;
     private TabLayout viewpagerIndi;
+    private Button coupon;
+
+    /////coupon_dialog
+    public static TextView coupontitle;
+    public static TextView couponexdate;
+    public static TextView couponbody;
+    private static RecyclerView cpncycle;
+    private static LinearLayout select;
+    /////coupon_dialog
+
     private ViewPager productDetailsviewpager;
     private TabLayout productDetailsTablayout;
 
@@ -52,6 +68,7 @@ public class ProductActivity extends AppCompatActivity {
             addtowish = findViewById(R.id.adtowish);
             productDetailsviewpager = findViewById(R.id.product_details_viewpager);
             productDetailsTablayout = findViewById(R.id.product_details_tablayout);
+            coupon = findViewById(R.id.coupn_red_btn);
 
         List<Integer> productImgs = new ArrayList<>();
         productImgs.add(R.drawable.phone);
@@ -107,6 +124,62 @@ public class ProductActivity extends AppCompatActivity {
           });
         }
         ///////rating layout
+        coupon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Dialog cpnrdm = new Dialog(ProductActivity.this);
+                cpnrdm.setContentView(R.layout.coupon_redeem);
+                cpnrdm.setCancelable(true);
+                cpnrdm.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+                ImageView tgopencycle = cpnrdm.findViewById(R.id.toggle_recycleview);
+                cpncycle = cpnrdm.findViewById(R.id.coupon_cycle);
+                select = cpnrdm.findViewById(R.id.selected_coupon);
+                coupontitle = cpnrdm.findViewById(R.id.rew);
+                couponexdate = cpnrdm.findViewById(R.id.reward_date);
+                couponbody = cpnrdm.findViewById(R.id.reward_body);
+
+                TextView originalprc = cpnrdm.findViewById(R.id.origin_price);
+                TextView couponprc = cpnrdm.findViewById(R.id.cupn_prs);
+
+                LinearLayoutManager layoutManager =  new LinearLayoutManager(ProductActivity.this);
+                layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+                cpncycle.setLayoutManager(layoutManager);
+
+                List<RewardModel>rewardModelList = new ArrayList<>();
+                rewardModelList.add(new RewardModel("Cashback","Till 21st, March 2020","GET 40% CASHBACK on any product above Rs.1000/- and below Rs.3000/-"));
+                rewardModelList.add(new RewardModel("Buy one get one","Till 04st, November 2020","GET 40% CASHBACK on any product above Rs.1000/- and below Rs.3000/-"));
+                rewardModelList.add(new RewardModel("Mega Discount","Till 08th, October 2020","GET 40% CASHBACK on any product above Rs.1000/- and below Rs.3000/-"));
+                rewardModelList.add(new RewardModel("Special Coupon","Till 05th, June 2021","GET 40% CASHBACK on any product above Rs.1000/- and below Rs.3000/-"));
+                rewardModelList.add(new RewardModel("Scratch Card","Till 12th, August 2020","GET 40% CASHBACK on any product above Rs.1000/- and below Rs.3000/-"));
+                rewardModelList.add(new RewardModel("Vseeit Coupon","Till 25th, April 2050","GET 40% CASHBACK on any product above Rs.1000/- and below Rs.3000/-"));
+
+                RewardAdapter rw = new RewardAdapter(rewardModelList,true);
+                cpncycle.setAdapter(rw);
+                rw.notifyDataSetChanged();
+
+                tgopencycle.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (cpncycle.getVisibility() == View.GONE){
+                            cpncycle.setVisibility(View.VISIBLE);
+                            select.setVisibility(View.GONE);
+                        }else{
+                            cpncycle.setVisibility(View.GONE);
+                            select.setVisibility(View.VISIBLE);
+                        }
+                    }
+                });
+            }
+        });
+    }
+    public static void Tshowdiacycle(){
+        if (cpncycle.getVisibility() == View.GONE){
+            cpncycle.setVisibility(View.VISIBLE);
+            select.setVisibility(View.GONE);
+        }else{
+            cpncycle.setVisibility(View.GONE);
+            select.setVisibility(View.VISIBLE);
+        }
     }
     private void setRating(int starposition) {
     for (int s = 0;s < ratenow.getChildCount();s++){

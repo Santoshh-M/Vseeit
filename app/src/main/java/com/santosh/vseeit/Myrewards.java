@@ -38,7 +38,7 @@ public class Myrewards extends Fragment {
         rewardModelList.add(new RewardModel("Scratch Card","Till 12th, August 2020","GET 40% CASHBACK on any product above Rs.1000/- and below Rs.3000/-"));
         rewardModelList.add(new RewardModel("Vseeit Coupon","Till 25th, April 2050","GET 40% CASHBACK on any product above Rs.1000/- and below Rs.3000/-"));
 
-        RewardAdapter rw = new RewardAdapter(rewardModelList);
+        RewardAdapter rw = new RewardAdapter(rewardModelList,false);
         rewardcycle.setAdapter(rw);
         rw.notifyDataSetChanged();
         return view;

@@ -10,17 +10,25 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-public class RewardAdapter extends RecyclerView.Adapter<RewardAdapter.Viewholder>{
-        private List<RewardModel> rewardModelList;
-    public RewardAdapter(List<RewardModel> rewardModelList) {
+public class RewardAdapter extends RecyclerView.Adapter<RewardAdapter.Viewholder> {
+    private List<RewardModel> rewardModelList;
+    private Boolean useMinilayout = false;
+
+    public RewardAdapter(List<RewardModel> rewardModelList, Boolean useMinilayout) {
         this.rewardModelList = rewardModelList;
+        this.useMinilayout = useMinilayout;
     }
 
     @NonNull
     @Override
     public RewardAdapter.Viewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.reward_item,parent,false);
-        return new Viewholder(v);
+        View v;
+        if (useMinilayout) {
+            v = LayoutInflater.from(parent.getContext()).inflate(R.layout.mini_rewards_item, parent, false);
+        } else {
+            v = LayoutInflater.from(parent.getContext()).inflate(R.layout.reward_item, parent, false);
+        }
+            return new Viewholder(v);
     }
 
     @Override
@@ -46,10 +54,21 @@ public class RewardAdapter extends RecyclerView.Adapter<RewardAdapter.Viewholder
             expirydate = itemView.findViewById(R.id.reward_date);
             couponbody = itemView.findViewById(R.id.reward_offer);
         }
-        public void setData(String titleValue, String dateValue, String bodyValue){
+        public void setData(final String titleValue, final String dateValue, final String bodyValue){
             rewardtitle.setText(titleValue);
             expirydate.setText(dateValue);
             couponbody.setText(bodyValue);
+
+            if (useMinilayout){
+                itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        ProductActivity.coupontitle.setText(titleValue);
+                        ProductActivity.couponexdate.setText(dateValue);
+                        ProductActivity.couponbody.setText(bodyValue);
+                    }
+                });
+            }
         }
     }
 }
