@@ -1,8 +1,11 @@
 package com.santosh.vseeit;
 
+import android.app.Dialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -134,7 +137,33 @@ public class cartItemViewholder extends RecyclerView.ViewHolder {
             } else {
                 coupnapplied.setVisibility(View.INVISIBLE);
             }
+            proqtty.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    final Dialog qttydia = new Dialog(itemView.getContext());
+                    qttydia.setContentView(R.layout.qtty_dialog);
+                    qttydia.setCancelable(false);
+                    qttydia.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+                    final EditText qttyno = qttydia.findViewById(R.id.add_qtty);
+                    Button cancel = qttydia.findViewById(R.id.cancel_btn);
+                    Button Apply = qttydia.findViewById(R.id.apply_btn);
 
+                    cancel.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            qttydia.dismiss();
+                        }
+                    });
+                    Apply.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                        proqtty.setText("Qty: " + qttyno.getText());
+                        qttydia.dismiss();
+                        }
+                    });
+                    qttydia.show();
+                }
+            });
             }
         }
 
