@@ -33,7 +33,7 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/coupon_cycle"
-        android:layout_width="430dp"
+        android:layout_width="match_parent"
         android:layout_height="200dp"
         android:layout_marginTop="8dp"
         android:background="@drawable/reward_gradient"

@@ -42,5 +42,6 @@ public class Myrewards extends Fragment {
         rewardcycle.setAdapter(rw);
         rw.notifyDataSetChanged();
         return view;
+
     }
 }

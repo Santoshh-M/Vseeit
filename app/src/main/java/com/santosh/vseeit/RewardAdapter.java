@@ -66,6 +66,7 @@ public class RewardAdapter extends RecyclerView.Adapter<RewardAdapter.Viewholder
                         ProductActivity.coupontitle.setText(titleValue);
                         ProductActivity.couponexdate.setText(dateValue);
                         ProductActivity.couponbody.setText(bodyValue);
+                        ProductActivity.showdiacycle();
                     }
                 });
             }
