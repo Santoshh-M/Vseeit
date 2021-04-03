@@ -32,18 +32,18 @@ public class HomePagemodel {
 
 
     ///////STRIP AD LAYOUT
-    private int resource;
+    private String resource;
     private String bgcolor;
 
-    public HomePagemodel(int type, int resource, String bgcolor){
+    public HomePagemodel(int type, String resource, String bgcolor){
         this.type = type;
         this.resource = resource;
         this.bgcolor = bgcolor;
     }
-    public int getResource() {
+    public String getResource() {
         return resource;
     }
-    public void setResource(int resource) {
+    public void setResource(String resource) {
         this.resource = resource;
     }
     public String getBgcolor() {

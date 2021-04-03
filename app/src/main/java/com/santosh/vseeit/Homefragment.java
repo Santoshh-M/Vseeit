@@ -1,4 +1,5 @@
 package com.santosh.vseeit;
+
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,9 +29,11 @@ public class Homefragment extends Fragment {
 
     private RecyclerView categoryrecyclerView;
     private CategoryAdapter categoryAdapter;
-    private RecyclerView test;
+    private RecyclerView homecycle;
+    private HomePageAdapter adapter;
     private List<Category_model> category_modelList;
     private FirebaseFirestore firebaseFirestore;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -51,65 +54,82 @@ public class Homefragment extends Fragment {
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                    if (task.isSuccessful()){
-                        for (QueryDocumentSnapshot documentSnapshot : task.getResult()){
-                            category_modelList.add(new Category_model(documentSnapshot.get("icon").toString(),documentSnapshot.get("categoryName").toString()));
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot documentSnapshot : task.getResult()) {
+                                category_modelList.add(new Category_model(documentSnapshot.get("icon").toString(), documentSnapshot.get("categoryName").toString()));
+                            }
+                            categoryAdapter.notifyDataSetChanged();
+                        } else {
+                            String error = task.getException().getMessage();
+                            Toast.makeText(getContext(), error, Toast.LENGTH_SHORT).show();
                         }
-                        categoryAdapter.notifyDataSetChanged();
-                    }else{
-                        String error = task.getException().getMessage();
-                        Toast.makeText(getContext(), error, Toast.LENGTH_SHORT).show();
-                    }
                     }
                 });
 
         /* Banner slider */
-        List<SliderModel>sliderModelList = new ArrayList<SliderModel>();
-        sliderModelList.add(new SliderModel(R.drawable.email_green,"#ffffff"));
-        sliderModelList.add(new SliderModel(R.drawable.ban,"#ffffff"));
-        sliderModelList.add(new SliderModel(R.drawable.gro,"#ffffff"));
-        sliderModelList.add(new SliderModel(R.drawable.nad,"#f59204"));
-        sliderModelList.add(new SliderModel(R.mipmap.app_icon,"#1794c8"));
-        sliderModelList.add(new SliderModel(R.drawable.vseeit,"#ffe50a"));
-        sliderModelList.add(new SliderModel(R.drawable.splashscreen,"#ffffff"));
-        sliderModelList.add(new SliderModel(R.drawable.forgotpass,"#ffffff"));
-
+//        List<SliderModel>sliderModelList = new ArrayList<SliderModel>();
+//        sliderModelList.add(new SliderModel(R.drawable.email_green,"#ffffff"));
         /* Banner slider */
 
 
         //////Horizontal_view
-        List<HorizontalProductModel> horizontalProductModelList = new ArrayList<>();
-        horizontalProductModelList.add(new HorizontalProductModel(R.drawable.phone,"Redmi","SD 730G processor", "Rs. 16,999/-"));
-        horizontalProductModelList.add(new HorizontalProductModel(R.drawable.sam,"Samsung","Ram 4GB / 6GB ", "Rs. 13,999/-"));
-        horizontalProductModelList.add(new HorizontalProductModel(R.drawable.one,"OnePlus","5G Phone", "Rs. 27,999/-"));
-        horizontalProductModelList.add(new HorizontalProductModel(R.drawable.iph,"Iphone","SD 650 process", "Rs. 50000/-"));
-        horizontalProductModelList.add(new HorizontalProductModel(R.drawable.phone,"Redmi 9 Pro Max","SD 650 process", "Rs. 99,999/-"));
-        horizontalProductModelList.add(new HorizontalProductModel(R.drawable.sam,"Samsung","Ram 4GB / 6GB ", "Rs. 13,999/-"));
-        horizontalProductModelList.add(new HorizontalProductModel(R.drawable.one,"OnePlus","5G Phone", "Rs. 27,999/-"));
-        horizontalProductModelList.add(new HorizontalProductModel(R.drawable.iph,"Iphone","SD 650 process", "Rs. 50000/-"));
-        horizontalProductModelList.add(new HorizontalProductModel(R.drawable.iph,"Iphone","SD 650 process", "Rs. 50000/-"));
-        horizontalProductModelList.add(new HorizontalProductModel(R.drawable.iph,"Iphone","SD 650 process", "Rs. 50000/-"));
-        ////////Horizontal_view
+//        List<HorizontalProductModel> horizontalProductModelList = new ArrayList<>();
+//        horizontalProductModelList.add(new HorizontalProductModel(R.drawable.phone,"Redmi","SD 730G processor", "Rs. 16,999/-"));
+//        horizontalProductModelList.add(new HorizontalProductModel(R.drawable.sam,"Samsung","Ram 4GB / 6GB ", "Rs. 13,999/-"));
+//        horizontalProductModelList.add(new HorizontalProductModel(R.drawable.one,"OnePlus","5G Phone", "Rs. 27,999/-"));
+//        horizontalProductModelList.add(new HorizontalProductModel(R.drawable.iph,"Iphone","SD 650 process", "Rs. 50000/-"));
+//        horizontalProductModelList.add(new HorizontalProductModel(R.drawable.phone,"Redmi 9 Pro Max","SD 650 process", "Rs. 99,999/-"));
+//        horizontalProductModelList.add(new HorizontalProductModel(R.drawable.sam,"Samsung","Ram 4GB / 6GB ", "Rs. 13,999/-"));
+//        horizontalProductModelList.add(new HorizontalProductModel(R.drawable.one,"OnePlus","5G Phone", "Rs. 27,999/-"));
+//        horizontalProductModelList.add(new HorizontalProductModel(R.drawable.iph,"Iphone","SD 650 process", "Rs. 50000/-"));
+//        horizontalProductModelList.add(new HorizontalProductModel(R.drawable.iph,"Iphone","SD 650 process", "Rs. 50000/-"));
+//        horizontalProductModelList.add(new HorizontalProductModel(R.drawable.iph,"Iphone","SD 650 process", "Rs. 50000/-"));
+//        ////////Horizontal_view
 
         //////////
-        test = view.findViewById(R.id.home_page_recycleview);
+
+        homecycle = view.findViewById(R.id.home_page_recycleview);
         LinearLayoutManager testlaymanager = new LinearLayoutManager(getContext());
         testlaymanager.setOrientation(LinearLayoutManager.VERTICAL);
-        test.setLayoutManager(testlaymanager);
+        homecycle.setLayoutManager(testlaymanager);
+        final List<HomePagemodel> homePagemodelList = new ArrayList<>();
+        adapter = new HomePageAdapter(homePagemodelList);
+        homecycle.setAdapter(adapter);
 
-        List<HomePagemodel> homePagemodelList = new ArrayList<>();
-        homePagemodelList.add(new HomePagemodel(0,sliderModelList));
-        homePagemodelList.add(new HomePagemodel(1,R.drawable.strip,"#ffe50a"));
-        homePagemodelList.add(new HomePagemodel(2,"New Arrivals",horizontalProductModelList));
-        homePagemodelList.add(new HomePagemodel(3,"Special Offers",horizontalProductModelList));
-        homePagemodelList.add(new HomePagemodel(1,R.drawable.strip,"#FFEF6C00"));
-        homePagemodelList.add(new HomePagemodel(3,"Exclusive deals",horizontalProductModelList));
-        homePagemodelList.add(new HomePagemodel(2,"Deals of the Day",horizontalProductModelList));
-        homePagemodelList.add(new HomePagemodel(1,R.drawable.strip,"FFEF6C00"));
+        firebaseFirestore.collection("CATEGORIES")
+                .document("HOME")
+                .collection("TOP_DEALS")
+                .orderBy("index")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot documentSnapshot : task.getResult()) {
+                                if ((long)documentSnapshot.get("view_type") == 0) {
+                                    List<SliderModel> sliderModelList = new ArrayList<>();
+                                    long no_of_banners = (long)documentSnapshot.get("no_of_banners");
+                                    for (long s = 1; s < no_of_banners + 1; s++) {
+                                        sliderModelList.add(new SliderModel(documentSnapshot.get("banner_" + s).toString(),
+                                                documentSnapshot.get("banner_" + s + "_bg").toString()));
+                                    }
+                                    homePagemodelList.add(new HomePagemodel(0, sliderModelList));
+                                } else if ((long) documentSnapshot.get("view_type") == 1) {
+                                    homePagemodelList.add(new HomePagemodel(1, documentSnapshot.get("strip_ad_banner").toString(),
+                                            documentSnapshot.get("background").toString()));
+                                } else if ((long) documentSnapshot.get("view_type") == 2) {
 
-        HomePageAdapter adapter = new HomePageAdapter(homePagemodelList);
-        test.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
+                                } else if ((long) documentSnapshot.get("view_type") == 3) {
+
+                                }
+                            }
+                            adapter.notifyDataSetChanged();
+                        } else {
+                            String error = task.getException().getMessage();
+                            Toast.makeText(getContext(), error, Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
         /////////
         return view;
     }
