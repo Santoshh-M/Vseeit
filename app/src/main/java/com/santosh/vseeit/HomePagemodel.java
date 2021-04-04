@@ -7,6 +7,7 @@ public class HomePagemodel {
     public static final int HORIZONTAL_PRO_VIEW = 2;
     public static final int GRID_PRO_VIEW = 3;
     private int type;
+    private String bgcolor;
 
     ///////Banner slider
     private List<SliderModel> sliderModelList;
@@ -33,7 +34,7 @@ public class HomePagemodel {
 
     ///////STRIP AD LAYOUT
     private String resource;
-    private String bgcolor;
+
 
     public HomePagemodel(int type, String resource, String bgcolor){
         this.type = type;
@@ -55,11 +56,14 @@ public class HomePagemodel {
     ///////STRIP AD LAYOUT
 
     ////////////HORIZONTAL PRO VIEW & GRID VIEW
+
     private String title;
     private List<HorizontalProductModel> horizontalProductModelList;
-    public HomePagemodel(int type, String title, List<HorizontalProductModel>horizontalProductModelList){
+
+    public HomePagemodel(int type, String title, String bgcolor,  List<HorizontalProductModel>horizontalProductModelList){
         this.type = type;
         this.title = title;
+        this.bgcolor = bgcolor;
         this.horizontalProductModelList = horizontalProductModelList;
     }
     public String getTitle() {

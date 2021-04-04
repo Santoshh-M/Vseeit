@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/slider_background"
     android:layout_margin="8dp"
+    android:id="@+id/hzcontainer"
     android:paddingTop="8dp"
     android:paddingBottom="8dp"
     android:elevation="3dp"

@@ -1,5 +1,4 @@
 package com.santosh.vseeit;
-
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +8,9 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 
 import java.util.List;
 
@@ -29,7 +31,8 @@ public class HorizontalProductAdapter extends RecyclerView.Adapter<HorizontalPro
 
     @Override
     public void onBindViewHolder(@NonNull HorizontalProductAdapter.ViewHolder holder, int position) {
-        int resource = horizontalProductModelList.get(position).getProductimg();
+        String productID = horizontalProductModelList.get(position).getProductID();
+        String resource = horizontalProductModelList.get(position).getProductimg();
         String title = horizontalProductModelList.get(position).getProductitle();
         String description = horizontalProductModelList.get(position).getProductdis();
         String price = horizontalProductModelList.get(position).getProductprice();
@@ -70,8 +73,9 @@ public class HorizontalProductAdapter extends RecyclerView.Adapter<HorizontalPro
                 }
             });
         }
-        private void setPrimg(int resource){
-            primg.setImageResource(resource);
+        private void setPrimg(String resource){
+//            primg.setImageResource(resource);
+            Glide.with(itemView.getContext()).load(resource).apply(new RequestOptions().placeholder(R.drawable.img)).into(primg);
         }
         private void setPrtitle(String title){
             prtitle.setText(title);
@@ -80,7 +84,7 @@ public class HorizontalProductAdapter extends RecyclerView.Adapter<HorizontalPro
             prdis.setText(description);
         }
         private void setPrprice(String price){
-            prprice.setText(price);
+            prprice.setText("\u20b9 "+price);
         }
     }
 }

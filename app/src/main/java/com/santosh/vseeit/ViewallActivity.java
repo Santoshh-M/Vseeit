@@ -53,16 +53,6 @@ public class ViewallActivity extends AppCompatActivity {
         else if (layout_code == 1) {
             gridView.setVisibility(View.VISIBLE);
             List<HorizontalProductModel> horizontalProductModelList = new ArrayList<>();
-            horizontalProductModelList.add(new HorizontalProductModel(R.drawable.phone, "Redmi", "SD 730G processor", "Rs. 16,999/-"));
-            horizontalProductModelList.add(new HorizontalProductModel(R.drawable.sam, "Samsung", "Ram 4GB / 6GB ", "Rs. 13,999/-"));
-            horizontalProductModelList.add(new HorizontalProductModel(R.drawable.one, "OnePlus", "5G Phone", "Rs. 27,999/-"));
-            horizontalProductModelList.add(new HorizontalProductModel(R.drawable.iph, "Iphone", "SD 650 process", "Rs. 50000/-"));
-            horizontalProductModelList.add(new HorizontalProductModel(R.drawable.phone, "Redmi 9 Pro Max", "SD 650 process", "Rs. 99,999/-"));
-            horizontalProductModelList.add(new HorizontalProductModel(R.drawable.iph, "Iphone 12", "SD 730G processor", "Rs. 16,999/-"));
-            horizontalProductModelList.add(new HorizontalProductModel(R.drawable.sam, "Samsung", "Ram 4GB / 6GB ", "Rs. 13,999/-"));
-            horizontalProductModelList.add(new HorizontalProductModel(R.drawable.one, "OnePlus", "5G Phone", "Rs. 27,999/-"));
-            horizontalProductModelList.add(new HorizontalProductModel(R.drawable.iph, "Iphone", "SD 650 process", "Rs. 50000/-"));
-            horizontalProductModelList.add(new HorizontalProductModel(R.drawable.phone, "Redmi 9 Pro Max", "SD 650 process", "Rs. 99,999/-"));
 
             GridproductAdapter gridproductAdapter = new GridproductAdapter(horizontalProductModelList);
             gridView.setAdapter(gridproductAdapter);

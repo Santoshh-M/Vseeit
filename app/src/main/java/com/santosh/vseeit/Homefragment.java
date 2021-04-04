@@ -118,6 +118,17 @@ public class Homefragment extends Fragment {
                                     homePagemodelList.add(new HomePagemodel(1, documentSnapshot.get("strip_ad_banner").toString(),
                                             documentSnapshot.get("background").toString()));
                                 } else if ((long) documentSnapshot.get("view_type") == 2) {
+                                    List<HorizontalProductModel> horizontalProductModelList = new ArrayList<>();
+                                    long no_of_products = (long)documentSnapshot.get("no_of_products");
+                                    for (long s = 1; s < no_of_products + 1; s++) {
+                                       horizontalProductModelList.add(new HorizontalProductModel(
+                                               documentSnapshot.get("product_ID_"+s).toString(),
+                                               documentSnapshot.get("product_img_"+s).toString(),
+                                               documentSnapshot.get("product_title_"+s).toString(),
+                                               documentSnapshot.get("product_sub_"+s).toString(),
+                                               documentSnapshot.get("product_price_"+s).toString()));
+                                    }
+                                    homePagemodelList.add(new HomePagemodel(2,documentSnapshot.get("layout_title").toString(),documentSnapshot.get("layout_bg").toString(),horizontalProductModelList));
 
                                 } else if ((long) documentSnapshot.get("view_type") == 3) {
 

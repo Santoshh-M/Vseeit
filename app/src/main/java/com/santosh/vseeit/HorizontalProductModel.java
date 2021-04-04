@@ -2,23 +2,33 @@ package com.santosh.vseeit;
 
 public class HorizontalProductModel {
 
-    private int productimg;
+    private String productID;
+    private String productimg;
     private String productitle;
     private String Productdis;
     private String productprice;
 
-    public HorizontalProductModel(int productimg, String productitle, String productdis, String productprice) {
+    public HorizontalProductModel(String productID, String productimg, String productitle, String productdis, String productprice) {
+        this.productID = productID;
         this.productimg = productimg;
         this.productitle = productitle;
         Productdis = productdis;
         this.productprice = productprice;
     }
 
-    public int getProductimg() {
+    public String getProductID() {
+        return productID;
+    }
+
+    public void setProductID(String productID) {
+        this.productimg = productID;
+    }
+
+    public String getProductimg() {
         return productimg;
     }
 
-    public void setProductimg(int productimg) {
+    public void setProductimg(String productimg) {
         this.productimg = productimg;
     }
 
