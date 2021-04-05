@@ -84,7 +84,7 @@ public class HorizontalProductAdapter extends RecyclerView.Adapter<HorizontalPro
             prdis.setText(description);
         }
         private void setPrprice(String price){
-            prprice.setText("\u20b9 "+price);
+            prprice.setText("\u20b9 "+price+"/-");
         }
     }
 }

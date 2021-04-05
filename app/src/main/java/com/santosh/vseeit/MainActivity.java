@@ -1,7 +1,10 @@
 package com.santosh.vseeit;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -21,6 +24,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.bumptech.glide.Glide;
 import com.google.android.material.navigation.NavigationView;
 
 import static com.santosh.vseeit.register.setsignup;
@@ -36,7 +40,7 @@ public class MainActivity extends AppCompatActivity
     private static final int ACCOUNT_FRAGMENT = 5;
 
     public static boolean showCart = false;
-
+    private ImageView nointconnection;
     private FrameLayout frameLayout;
     private ImageView actionBarlogo;
     private int currentFragment = -1;
@@ -61,16 +65,27 @@ public class MainActivity extends AppCompatActivity
         navigationView.getMenu().getItem(0).setChecked(true);
 
         frameLayout = findViewById(R.id.main_framelayout);
-        if (showCart) {
-            drawer.setDrawerLockMode(1);
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            gotoFragment("My Cart",new MyCart(),-2);
-        } else {
-            ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                    this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-            drawer.addDrawerListener(toggle);
-            toggle.syncState();
-            setFragment(new Homefragment(), HOME_FRAGMENT);
+        nointconnection = findViewById(R.id.no_internet);
+
+        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+
+        if (networkInfo != null && networkInfo.isConnected() == true) {
+            nointconnection.setVisibility(View.GONE);
+            if (showCart) {
+                drawer.setDrawerLockMode(1);
+                getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+                gotoFragment("My Cart", new MyCart(), -2);
+            } else {
+                ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                        this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+                drawer.addDrawerListener(toggle);
+                toggle.syncState();
+                setFragment(new Homefragment(), HOME_FRAGMENT);
+            }
+        }else {
+            Glide.with(this).load(R.drawable.img).into(nointconnection);
+            nointconnection.setVisibility(View.VISIBLE);
         }
     }
     @Override
