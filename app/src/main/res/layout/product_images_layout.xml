@@ -35,8 +35,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:background="@color/white"
         android:clickable="true"
+        android:tint="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/wishlist" />
@@ -104,10 +104,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
-        android:text="Rs. 59,999/-"
+        android:fontFamily="@font/opensans"
+        android:text="@string/Rs"
         android:textStyle="bold"
         android:textSize="24sp"
-        android:fontFamily="@font/fontnew"
         android:textColor="#000000"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
@@ -117,7 +117,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:text="Rs. 60,000/-"
+        android:fontFamily="@font/opensans"
+        android:text="@string/Rs"
         app:layout_constraintBottom_toBottomOf="@+id/pro_price"
         app:layout_constraintStart_toEndOf="@+id/pro_price" />
 

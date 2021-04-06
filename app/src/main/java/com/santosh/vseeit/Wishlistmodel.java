@@ -2,17 +2,16 @@ package com.santosh.vseeit;
 
 public class Wishlistmodel {
 
-
-    private int productimage;
+    private String productimage;
     private String productTitle;
-    private int freecoupon;
+    private long freecoupon;
     private String rating;
-    private int ttlrating;
+    private long ttlrating;
     private String proprice;
     private String cutprice;
-    private String paymentmethod;
+    private boolean COD;
 
-    public Wishlistmodel(int productimage, String productTitle, int freecoupon, String rating, int ttlrating, String proprice, String cutprice, String paymentmethod) {
+    public Wishlistmodel(String productimage, String productTitle, long freecoupon, String rating, long ttlrating, String proprice, String cutprice, boolean cod) {
         this.productimage = productimage;
         this.productTitle = productTitle;
         this.freecoupon = freecoupon;
@@ -20,14 +19,15 @@ public class Wishlistmodel {
         this.ttlrating = ttlrating;
         this.proprice = proprice;
         this.cutprice = cutprice;
-        this.paymentmethod = paymentmethod;
+        this.COD = cod;
+
     }
 
-    public int getProductimage() {
+    public String getProductimage() {
         return productimage;
     }
 
-    public void setProductimage(int productimage) {
+    public void setProductimage(String productimage) {
         this.productimage = productimage;
     }
 
@@ -39,11 +39,11 @@ public class Wishlistmodel {
         this.productTitle = productTitle;
     }
 
-    public int getFreecoupon() {
+    public long getFreecoupon() {
         return freecoupon;
     }
 
-    public void setFreecoupon(int freecoupon) {
+    public void setFreecoupon(long freecoupon) {
         this.freecoupon = freecoupon;
     }
 
@@ -55,11 +55,11 @@ public class Wishlistmodel {
         this.rating = rating;
     }
 
-    public int getTtlrating() {
+    public long getTtlrating() {
         return ttlrating;
     }
 
-    public void setTtlrating(int ttlrating) {
+    public void setTtlrating(long ttlrating) {
         this.ttlrating = ttlrating;
     }
 
@@ -79,12 +79,11 @@ public class Wishlistmodel {
         this.cutprice = cutprice;
     }
 
-    public String getPaymentmethod() {
-        return paymentmethod;
+    public boolean isCOD() {
+        return COD;
     }
 
-    public void setPaymentmethod(String paymentmethod) {
-        this.paymentmethod = paymentmethod;
+    public void setCOD(boolean COD) {
+        this.COD = COD;
     }
-
 }

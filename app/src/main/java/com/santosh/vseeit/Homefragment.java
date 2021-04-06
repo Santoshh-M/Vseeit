@@ -1,13 +1,19 @@
 package com.santosh.vseeit;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.bumptech.glide.Glide;
 
 import static com.santosh.vseeit.DBqueries.category_modelList;
 import static com.santosh.vseeit.DBqueries.homePagemodelList;
@@ -24,38 +30,52 @@ public class Homefragment extends Fragment {
     private CategoryAdapter categoryAdapter;
     private RecyclerView homecycle;
     private HomePageAdapter adapter;
+    private ImageView nointconnection;
 
 //    private FirebaseFirestore firebaseFirestore;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
-        categoryrecyclerView = view.findViewById(R.id.Category_recycler_view);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
-        layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-        categoryrecyclerView.setLayoutManager(layoutManager);
-        categoryAdapter = new CategoryAdapter(category_modelList);
-        categoryrecyclerView.setAdapter(categoryAdapter);
+        nointconnection = view.findViewById(R.id.no_internet);
 
-        if (category_modelList.size() == 0){
-            loadcategories(categoryAdapter,getContext());
-        }else {
-            categoryAdapter.notifyDataSetChanged();
-        }
-        homecycle = view.findViewById(R.id.home_page_recycleview);
-        LinearLayoutManager testlaymanager = new LinearLayoutManager(getContext());
-        testlaymanager.setOrientation(LinearLayoutManager.VERTICAL);
-        homecycle.setLayoutManager(testlaymanager);
-        adapter = new HomePageAdapter(homePagemodelList);
-        homecycle.setAdapter(adapter);
+        ConnectivityManager connectivityManager = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+        if (networkInfo != null && networkInfo.isConnected() == true) {
+            nointconnection.setVisibility(View.GONE);
 
-        if (homePagemodelList.size() == 0){
-           loadFragmentData(adapter,getContext());
+            categoryrecyclerView = view.findViewById(R.id.Category_recycler_view);
+            LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
+            layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+            categoryrecyclerView.setLayoutManager(layoutManager);
+            categoryAdapter = new CategoryAdapter(category_modelList);
+            categoryrecyclerView.setAdapter(categoryAdapter);
+
+            if (category_modelList.size() == 0){
+                loadcategories(categoryAdapter,getContext());
+            }else {
+                categoryAdapter.notifyDataSetChanged();
+            }
+            homecycle = view.findViewById(R.id.home_page_recycleview);
+            LinearLayoutManager testlaymanager = new LinearLayoutManager(getContext());
+            testlaymanager.setOrientation(LinearLayoutManager.VERTICAL);
+            homecycle.setLayoutManager(testlaymanager);
+            adapter = new HomePageAdapter(homePagemodelList);
+            homecycle.setAdapter(adapter);
+
+            if (homePagemodelList.size() == 0){
+                loadFragmentData(adapter,getContext());
+            }else {
+                categoryAdapter.notifyDataSetChanged();
+            }
         }else {
-            categoryAdapter.notifyDataSetChanged();
+            Glide.with(this).load(R.drawable.img).into(nointconnection);
+            nointconnection.setVisibility(View.VISIBLE);
         }
+
         return view;
     }
 }

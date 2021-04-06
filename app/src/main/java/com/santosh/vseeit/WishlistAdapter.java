@@ -12,6 +12,9 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
+
 import java.util.List;
 
 public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHolder> {
@@ -35,14 +38,14 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-    int resource = wishlistmodelList.get(position).getProductimage();
+    String resource = wishlistmodelList.get(position).getProductimage();
     String title = wishlistmodelList.get(position).getProductTitle();
-    int freecoupon = wishlistmodelList.get(position).getFreecoupon();
+    long freecoupon = wishlistmodelList.get(position).getFreecoupon();
     String rating = wishlistmodelList.get(position).getRating();
-    int totalrts = wishlistmodelList.get(position).getTtlrating();
+    long totalrts = wishlistmodelList.get(position).getTtlrating();
     String pprice = wishlistmodelList.get(position).getProprice();
     String cprice = wishlistmodelList.get(position).getCutprice();
-    String payment = wishlistmodelList.get(position).getPaymentmethod();
+    boolean payment = wishlistmodelList.get(position).isCOD();
     holder.setData(resource,title,freecoupon,rating,totalrts,pprice,cprice,payment);
 
     }
@@ -80,25 +83,30 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
             deletebtn = itemView.findViewById(R.id.delete_btn);
 
         }
-       private void setData(int resource, String title, int freecouponNo, String averageRate, int TotalRatingNo, String price, String cuttedpriceValue, String paymentNo){
-            proimg.setImageResource(resource);
-            protitle.setText(title);
-            if (freecouponNo != 0) {
-                couponicon.setVisibility(View.VISIBLE);
-                if (freecouponNo == 1) {
-                    freecoupon.setText("Free " + freecouponNo + " coupon");
-                } else {
-                    freecoupon.setText("Free " + freecouponNo + " coupons");
-                }
-            }else {
-                couponicon.setVisibility(View.INVISIBLE);
-                couponicon.setVisibility(View.INVISIBLE);
-            }
-            rating.setText(averageRate);
-            ttlrating.setText(TotalRatingNo+"(ratings)");
-            proprice.setText(price);
-            cutprice.setText(cuttedpriceValue);
-            paymentmethod.setText(paymentNo);
+       private void setData(String resource, String title, long freecouponNo, String averageRate, long TotalRatingNo, String price, String cuttedpriceValue,boolean COD) {
+           //      proimg.setImageResource(resource);
+           Glide.with(itemView.getContext()).load(resource).apply(new RequestOptions().placeholder(R.drawable.img)).into(proimg);
+           protitle.setText(title);
+           if (freecouponNo != 0) {
+               couponicon.setVisibility(View.VISIBLE);
+               if (freecouponNo == 1) {
+                   freecoupon.setText("Free " + freecouponNo + " coupon");
+               } else {
+                   freecoupon.setText("Free " + freecouponNo + " coupons");
+               }
+           } else {
+               couponicon.setVisibility(View.INVISIBLE);
+               couponicon.setVisibility(View.INVISIBLE);
+           }
+           rating.setText(averageRate);
+           ttlrating.setText(TotalRatingNo + "(ratings)");
+           proprice.setText("\u20b9 "+price+"/-");
+           cutprice.setText("\u20b9 "+cuttedpriceValue+"/-");
+           if (COD){
+               paymentmethod.setVisibility(View.VISIBLE);
+             }else{
+               paymentmethod.setVisibility(View.INVISIBLE);
+             }
             if (wishlist){
                 deletebtn.setVisibility(View.VISIBLE);
             }else{

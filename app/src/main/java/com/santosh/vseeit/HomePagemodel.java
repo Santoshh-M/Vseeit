@@ -1,4 +1,5 @@
 package com.santosh.vseeit;
+
 import java.util.List;
 
 public class HomePagemodel {
@@ -31,7 +32,6 @@ public class HomePagemodel {
     /////Banner slider
 
 
-
     ///////STRIP AD LAYOUT
     private String resource;
 
@@ -55,17 +55,38 @@ public class HomePagemodel {
     }
     ///////STRIP AD LAYOUT
 
-    ////////////HORIZONTAL PRO VIEW & GRID VIEW
 
     private String title;
     private List<HorizontalProductModel> horizontalProductModelList;
+    ////////////HORIZONTAL PRO VIEW & WISHLIST
+    private List<Wishlistmodel> viewAllpro;
 
-    public HomePagemodel(int type, String title, String bgcolor,  List<HorizontalProductModel>horizontalProductModelList){
+    public HomePagemodel(int type, String title, String bgcolor, List<HorizontalProductModel>horizontalProductModelList,List<Wishlistmodel> viewAllpro){
+        this.type = type;
+        this.title = title;
+        this.bgcolor = bgcolor;
+        this.horizontalProductModelList = horizontalProductModelList;
+        this.viewAllpro = viewAllpro;
+    }
+
+    public List<Wishlistmodel> getViewAllpro() {
+        return viewAllpro;
+    }
+
+    public void setViewAllpro(List<Wishlistmodel> viewAllpro) {
+        this.viewAllpro = viewAllpro;
+    }
+    ////////////HORIZONTAL PRO VIEW
+
+    //////////Grid Product layout
+    public HomePagemodel(int type, String title, String bgcolor, List<HorizontalProductModel>horizontalProductModelList){
         this.type = type;
         this.title = title;
         this.bgcolor = bgcolor;
         this.horizontalProductModelList = horizontalProductModelList;
     }
+    /////////Grid Product layout
+
     public String getTitle() {
         return title;
     }
@@ -78,6 +99,5 @@ public class HomePagemodel {
     public void setHorizontalProductModelList(List<HorizontalProductModel> horizontalProductModelList) {
         this.horizontalProductModelList = horizontalProductModelList;
     }
-    ////////////HORIZONTAL PRO VIEW & GRID VIEW
 
 }
