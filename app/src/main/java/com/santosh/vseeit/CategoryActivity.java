@@ -11,11 +11,15 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
-import java.util.List;
+
+import static com.santosh.vseeit.DBqueries.lists;
+import static com.santosh.vseeit.DBqueries.loadFragmentData;
+import static com.santosh.vseeit.DBqueries.loadedcategory;
 
 public class CategoryActivity extends AppCompatActivity {
 
     private RecyclerView categorycycle;
+    private HomePageAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,8 +35,22 @@ public class CategoryActivity extends AppCompatActivity {
         LinearLayoutManager testlaymanager = new LinearLayoutManager(this);
         testlaymanager.setOrientation(LinearLayoutManager.VERTICAL);
         categorycycle.setLayoutManager(testlaymanager);
-        List<HomePagemodel> homePagemodelList = new ArrayList<>();
-        HomePageAdapter adapter = new HomePageAdapter(homePagemodelList);
+
+
+        int listposition = 0;
+        for (int s=0; s<loadedcategory.size();s++){
+            if (loadedcategory.get(s).equals(title.toUpperCase())){
+                listposition = s;
+            }
+        }
+        if (listposition == 0){
+            loadedcategory.add(title.toUpperCase());
+            lists.add(new ArrayList<HomePagemodel>());
+            adapter = new HomePageAdapter(lists.get(loadedcategory.size() - 1));
+            loadFragmentData(adapter,this,loadedcategory.size() - 1,title);
+        }else{
+            adapter = new HomePageAdapter(lists.get(listposition));
+        }
         categorycycle.setAdapter(adapter);
         adapter.notifyDataSetChanged();
         /////////

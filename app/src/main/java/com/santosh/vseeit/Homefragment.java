@@ -15,10 +15,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 
+import java.util.ArrayList;
+
 import static com.santosh.vseeit.DBqueries.category_modelList;
-import static com.santosh.vseeit.DBqueries.homePagemodelList;
+import static com.santosh.vseeit.DBqueries.lists;
 import static com.santosh.vseeit.DBqueries.loadFragmentData;
 import static com.santosh.vseeit.DBqueries.loadcategories;
+import static com.santosh.vseeit.DBqueries.loadedcategory;
 
 public class Homefragment extends Fragment {
 
@@ -63,14 +66,18 @@ public class Homefragment extends Fragment {
             LinearLayoutManager testlaymanager = new LinearLayoutManager(getContext());
             testlaymanager.setOrientation(LinearLayoutManager.VERTICAL);
             homecycle.setLayoutManager(testlaymanager);
-            adapter = new HomePageAdapter(homePagemodelList);
-            homecycle.setAdapter(adapter);
 
-            if (homePagemodelList.size() == 0){
-                loadFragmentData(adapter,getContext());
+            if (lists.size() == 0){
+                loadedcategory.add("HOME");
+                lists.add(new ArrayList<HomePagemodel>());
+                adapter = new HomePageAdapter(lists.get(0));
+                loadFragmentData(adapter,getContext(),0,"Home");
             }else {
-                categoryAdapter.notifyDataSetChanged();
+                adapter = new HomePageAdapter(lists.get(0));
+                adapter.notifyDataSetChanged();
             }
+
+            homecycle.setAdapter(adapter);
         }else {
             Glide.with(this).load(R.drawable.img).into(nointconnection);
             nointconnection.setVisibility(View.VISIBLE);

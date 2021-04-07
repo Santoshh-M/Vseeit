@@ -16,12 +16,12 @@ import java.util.List;
 
 public class DBqueries {
 
-
     public static FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
-    public static  List<Category_model> category_modelList = new ArrayList<>();
-    public static  List<HomePagemodel> homePagemodelList = new ArrayList<>();
+    public static List<Category_model> category_modelList = new ArrayList<>();
+    public static List<List<HomePagemodel>> lists = new ArrayList<>();
+    public static List<String> loadedcategory = new ArrayList<>();
 
-    public static void loadcategories(final CategoryAdapter categoryAdapter, final Context context){
+    public static void loadcategories(final CategoryAdapter categoryAdapter, final Context context) {
 
 
         firebaseFirestore = FirebaseFirestore.getInstance();
@@ -40,11 +40,11 @@ public class DBqueries {
                         }
                     }
                 });
-
     }
-    public static void loadFragmentData(final HomePageAdapter adapter, final Context context){
+
+    public static void loadFragmentData(final HomePageAdapter adapter, final Context context, final int index, String categoryName) {
         firebaseFirestore.collection("CATEGORIES")
-                .document("HOME")
+                .document(categoryName.toUpperCase())
                 .collection("TOP_DEALS")
                 .orderBy("index")
                 .get()
@@ -53,57 +53,53 @@ public class DBqueries {
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot documentSnapshot : task.getResult()) {
-                                if ((long)documentSnapshot.get("view_type") == 0) {
+                                if ((long) documentSnapshot.get("view_type") == 0) {
 
                                     List<SliderModel> sliderModelList = new ArrayList<>();
-                                    long no_of_banners = (long)documentSnapshot.get("no_of_banners");
+                                    long no_of_banners = (long) documentSnapshot.get("no_of_banners");
                                     for (long s = 1; s < no_of_banners + 1; s++) {
                                         sliderModelList.add(new SliderModel(documentSnapshot.get("banner_" + s).toString(),
                                                 documentSnapshot.get("banner_" + s + "_bg").toString()));
                                     }
-                                    homePagemodelList.add(new HomePagemodel(0, sliderModelList));
+                                    lists.get(index).add(new HomePagemodel(0, sliderModelList));
                                 } else if ((long) documentSnapshot.get("view_type") == 1) {
-                                    homePagemodelList.add(new HomePagemodel(1, documentSnapshot.get("strip_ad_banner").toString(),
+                                    lists.get(index).add(new HomePagemodel(1, documentSnapshot.get("strip_ad_banner").toString(),
                                             documentSnapshot.get("background").toString()));
                                 } else if ((long) documentSnapshot.get("view_type") == 2) {
                                     List<Wishlistmodel> viewallPro = new ArrayList<>();
                                     List<HorizontalProductModel> horizontalProductModelList = new ArrayList<>();
-                                    long no_of_products = (long)documentSnapshot.get("no_of_products");
+                                    long no_of_products = (long) documentSnapshot.get("no_of_products");
                                     for (long s = 1; s < no_of_products + 1; s++) {
                                         horizontalProductModelList.add(new HorizontalProductModel(
-                                                documentSnapshot.get("product_ID_"+s).toString(),
-                                                documentSnapshot.get("product_img_"+s).toString(),
-                                                documentSnapshot.get("product_title_"+s).toString(),
-                                                documentSnapshot.get("product_sub_"+s).toString(),
-                                                documentSnapshot.get("product_price_"+s).toString()));
+                                                documentSnapshot.get("product_ID_" + s).toString(),
+                                                documentSnapshot.get("product_img_" + s).toString(),
+                                                documentSnapshot.get("product_title_" + s).toString(),
+                                                documentSnapshot.get("product_sub_" + s).toString(),
+                                                documentSnapshot.get("product_price_" + s).toString()));
 
 
-                                        viewallPro.add(new Wishlistmodel(documentSnapshot.get("product_img_"+s).toString()
-                                                ,documentSnapshot.get("product_full_title_"+s).toString()
-                                                ,(long)documentSnapshot.get("free_coupons_"+s)
-                                                ,documentSnapshot.get("avg_rating_"+s).toString()
-                                                ,(long)documentSnapshot.get("total_ratings_"+s)
-                                                ,documentSnapshot.get("product_price_"+s).toString()
-                                                ,documentSnapshot.get("cutted_price_"+s).toString()
-                                                ,(boolean)documentSnapshot.get("COD_"+s)));
+                                        viewallPro.add(new Wishlistmodel(documentSnapshot.get("product_img_" + s).toString()
+                                                , documentSnapshot.get("product_full_title_" + s).toString()
+                                                , (long) documentSnapshot.get("free_coupons_" + s)
+                                                , documentSnapshot.get("avg_rating_" + s).toString()
+                                                , (long) documentSnapshot.get("total_ratings_" + s)
+                                                , documentSnapshot.get("product_price_" + s).toString()
+                                                , documentSnapshot.get("cutted_price_" + s).toString()
+                                                , (boolean) documentSnapshot.get("COD_" + s)));
                                     }
-                                    homePagemodelList.add(new HomePagemodel(2,documentSnapshot.get("layout_title").toString(),documentSnapshot.get("layout_bg").toString(),horizontalProductModelList,viewallPro));
-
+                                    lists.get(index).add(new HomePagemodel(2, documentSnapshot.get("layout_title").toString(), documentSnapshot.get("layout_bg").toString(), horizontalProductModelList, viewallPro));
                                 } else if ((long) documentSnapshot.get("view_type") == 3) {
-
                                     List<HorizontalProductModel> GridLayoutModellist = new ArrayList<>();
-                                    long no_of_products = (long)documentSnapshot.get("no_of_products");
+                                    long no_of_products = (long) documentSnapshot.get("no_of_products");
                                     for (long s = 1; s < no_of_products + 1; s++) {
-                                        GridLayoutModellist .add(new HorizontalProductModel(
-                                                documentSnapshot.get("product_ID_"+s).toString(),
-                                                documentSnapshot.get("product_img_"+s).toString(),
-                                                documentSnapshot.get("product_title_"+s).toString(),
-                                                documentSnapshot.get("product_sub_"+s).toString(),
-                                                documentSnapshot.get("product_price_"+s).toString()));
+                                        GridLayoutModellist.add(new HorizontalProductModel(
+                                                documentSnapshot.get("product_ID_" + s).toString(),
+                                                documentSnapshot.get("product_img_" + s).toString(),
+                                                documentSnapshot.get("product_title_" + s).toString(),
+                                                documentSnapshot.get("product_sub_" + s).toString(),
+                                                documentSnapshot.get("product_price_" + s).toString()));
                                     }
-                                    homePagemodelList.add(new HomePagemodel(3,documentSnapshot.get("layout_title").toString(),documentSnapshot.get("layout_bg").toString(),GridLayoutModellist));
-
-
+                                    lists.get(index).add(new HomePagemodel(3, documentSnapshot.get("layout_title").toString(), documentSnapshot.get("layout_bg").toString(), GridLayoutModellist));
                                 }
                             }
                             adapter.notifyDataSetChanged();
@@ -114,6 +110,4 @@ public class DBqueries {
                     }
                 });
     }
-
-
 }
