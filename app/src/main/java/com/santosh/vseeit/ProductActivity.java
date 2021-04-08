@@ -23,6 +23,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,11 +48,14 @@ public class ProductActivity extends AppCompatActivity {
 
     /////rating layout
     private LinearLayout ratenow;
+    private Button buynow;
+
 
     /////rating layout
     private static boolean ALREADY_ADDED_TO_WISH = false;
     private FloatingActionButton addtowish;
 
+    private FirebaseFirestore ffstore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,15 +74,14 @@ public class ProductActivity extends AppCompatActivity {
             productDetailsTablayout = findViewById(R.id.product_details_tablayout);
             coupon = findViewById(R.id.coupn_red_btn);
 
-        List<Integer> productImgs = new ArrayList<>();
-        productImgs.add(R.drawable.phone);
-        productImgs.add(R.drawable.phone);
-        productImgs.add(R.drawable.splashscreen);
-        productImgs.add(R.drawable.forgotpass);
+
+        ffstore = FirebaseFirestore.getInstance();
+        ffstore.collection("PRODUCTS").document("K2BgF3KbAOhbWagKvRnC")
+                .get();
 
 
-        ProductimagesAdapter productimagesAdapter = new ProductimagesAdapter(productImgs);
-        proimgviewpager.setAdapter(productimagesAdapter);
+        //ProductimagesAdapter productimagesAdapter = new ProductimagesAdapter(productImgs);
+        //proimgviewpager.setAdapter(productimagesAdapter);
 
             viewpagerIndi.setupWithViewPager(proimgviewpager,true);
             addtowish.setOnClickListener(new View.OnClickListener() {
