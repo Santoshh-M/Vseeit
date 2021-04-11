@@ -31,6 +31,7 @@ public class CategoryActivity extends AppCompatActivity {
         getSupportActionBar().setTitle(title);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         categorycycle = findViewById(R.id.category_recycleview);
+
         //////////
         LinearLayoutManager testlaymanager = new LinearLayoutManager(this);
         testlaymanager.setOrientation(LinearLayoutManager.VERTICAL);

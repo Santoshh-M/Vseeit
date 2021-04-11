@@ -76,7 +76,6 @@ public class Homefragment extends Fragment {
                 adapter = new HomePageAdapter(lists.get(0));
                 adapter.notifyDataSetChanged();
             }
-
             homecycle.setAdapter(adapter);
         }else {
             Glide.with(this).load(R.drawable.img).into(nointconnection);

@@ -1,4 +1,5 @@
 package com.santosh.vseeit;
+
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,7 +9,6 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ProductSpecification extends Fragment {
@@ -16,7 +16,8 @@ public class ProductSpecification extends Fragment {
         // Required empty public constructor
     }
     private RecyclerView speccycleview;
-    public static  List<ProductSpecificationModel> productSpecificationModelList;
+    public List<ProductSpecificationModel> productSpecificationModelList;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -25,10 +26,7 @@ public class ProductSpecification extends Fragment {
         speccycleview = view.findViewById(R.id.pro_spec_recycler);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(view.getContext());
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-
         speccycleview.setLayoutManager(linearLayoutManager);
-
-        productSpecificationModelList = new ArrayList<>();
 
 
         ProductSpecificationAdapter productSpecificationAdapter = new ProductSpecificationAdapter(productSpecificationModelList);

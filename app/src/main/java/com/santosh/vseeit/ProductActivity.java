@@ -55,7 +55,6 @@ public class ProductActivity extends AppCompatActivity {
     //
 
     private FirebaseFirestore ffstore;
-    List<String> productImgs = new ArrayList<>();
 
     /////product description
     private ConstraintLayout productdetailsonlycontainer;
@@ -68,6 +67,7 @@ public class ProductActivity extends AppCompatActivity {
     /////rating layout
     private LinearLayout ratenow;
     private TextView totlrating;
+    private TextView avgrate;
 
     /////rating layout
     private static boolean ALREADY_ADDED_TO_WISH = false;
@@ -75,6 +75,7 @@ public class ProductActivity extends AppCompatActivity {
     private LinearLayout ratingsNo;
     private TextView ttlratingfigure;
     private LinearLayout ratingprogresscontainer;
+    private LinearLayout ratingsprobar;
 
     ///Buying
     private TextView Addtocart;
@@ -89,9 +90,9 @@ public class ProductActivity extends AppCompatActivity {
     private static LinearLayout select;
     /////coupon_dialog
 
-    public static String productDescription;
-    public static String productOtherdetails;
-    public static int tabposition = -1;
+    private static List<ProductSpecificationModel> productSpecificationModelList = new ArrayList<>();
+    private static String productDescription;
+    private static String productOtherdetails;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,6 +110,8 @@ public class ProductActivity extends AppCompatActivity {
         productDetailsviewpager = findViewById(R.id.product_details_viewpager);
         productDetailsTablayout = findViewById(R.id.product_details_tablayout);
         coupon = findViewById(R.id.coupn_red_btn);
+        Addtocart = findViewById(R.id.addtocart);
+        buynow = findViewById(R.id.buy_now);
         productTitle = findViewById(R.id.product_Title);
         avgratings = findViewById(R.id.tv_pro_rating_miniv);
         ttlrates = findViewById(R.id.ttl_rate_miniv);
@@ -116,8 +119,6 @@ public class ProductActivity extends AppCompatActivity {
         cuttedprc = findViewById(R.id.cutted_price);
         imgcod = findViewById(R.id.cod_indi);
         tvcodindi = findViewById(R.id.tv_cod_indi);
-        Addtocart = findViewById(R.id.addtocart);
-        buynow = findViewById(R.id.buy_now);
         rewicon = findViewById(R.id.reward_icon);
         rewtitle = findViewById(R.id.reward_title);
         rewbody = findViewById(R.id.reward_body);
@@ -127,71 +128,78 @@ public class ProductActivity extends AppCompatActivity {
         totlrating = findViewById(R.id.ttl_rates);
         ratingsNo = findViewById(R.id.ratings_total);
         ttlratingfigure = findViewById(R.id.ttl_ratings);
-        ratingprogresscontainer = findViewById(R.id.rate_str_5);
+        ratingprogresscontainer = findViewById(R.id.ratings_prog_container);
+        avgrate = findViewById(R.id.avarage_rating);
 
         ffstore = FirebaseFirestore.getInstance();
+        final List<String> productImgs = new ArrayList<>();
         ffstore.collection("PRODUCTS").document("K2BgF3KbAOhbWagKvRnC")
                 .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if (task.isSuccessful()){
-                    DocumentSnapshot documentSnapshot = task.getResult();
-                    for (long s = 1;s < (long) documentSnapshot.get("no_of_product_images") + 1;s++){
-                        productImgs.add(documentSnapshot.get("product_img_"+s).toString());
-                        productTitle.setText(documentSnapshot.get("product_title").toString());
+                        if (task.isSuccessful()) {
+                            DocumentSnapshot documentSnapshot = task.getResult();
 
-                        avgratings.setText(documentSnapshot.get("avg_rating").toString());
-                        ttlrates.setText("("+(long)documentSnapshot.get("total_ratings")+")ratings");
-                        productprc.setText("\u20b9 "+documentSnapshot.get("product_price").toString()+"/-");
-                        cuttedprc.setText("\u20b9 "+documentSnapshot.get("cutted_price").toString()+"/-");
+                            for (long s = 1; s < (long) documentSnapshot.get("no_of_prouct_images") + 1; s++) {
+                                productImgs.add(documentSnapshot.get("product_img_" + s).toString());
+                            }
+                            ProductimagesAdapter productimagesAdapter = new ProductimagesAdapter(productImgs);
+                            proimgviewpager.setAdapter(productimagesAdapter);
 
-                        if ((Boolean)documentSnapshot.get("COD")){
-                            imgcod.setVisibility(View.VISIBLE);
-                            tvcodindi.setVisibility(View.VISIBLE);
-                        }else{
-                            imgcod.setVisibility(View.INVISIBLE);
-                            tvcodindi.setVisibility(View.INVISIBLE);
+                            productTitle.setText(documentSnapshot.get("product_title").toString());
+                            avgratings.setText(documentSnapshot.get("avg_rating").toString());
+                            ttlrates.setText("(" + (long) documentSnapshot.get("total_ratings") + ")ratings");
+                            productprc.setText("\u20b9 " + documentSnapshot.get("product_price").toString() + "/-");
+                            cuttedprc.setText("\u20b9 " + documentSnapshot.get("cutted_price").toString() + "/-");
+
+                            if ((Boolean) documentSnapshot.get("COD")) {
+                                imgcod.setVisibility(View.VISIBLE);
+                                tvcodindi.setVisibility(View.VISIBLE);
+                            } else {
+                                imgcod.setVisibility(View.INVISIBLE);
+                                tvcodindi.setVisibility(View.INVISIBLE);
+                            }
+
+                            rewtitle.setText((long) documentSnapshot.get("free_coupons") + documentSnapshot.get("free_coupons_title").toString());
+                            rewbody.setText(documentSnapshot.get("free_coupons_body").toString());
+
+                            if ((boolean) documentSnapshot.get("use_tab_layout")) {
+                                productdetailstabcontainer.setVisibility(View.VISIBLE);
+                                productdetailsonlycontainer.setVisibility(View.GONE);
+                                productDescription = documentSnapshot.get("product_description").toString();
+
+                                productOtherdetails = documentSnapshot.get("product_other_details").toString();
+
+                                for (long n = 1; n < (long) documentSnapshot.get("total_spec_title") + 1; n++) {
+                                    productSpecificationModelList.add(new ProductSpecificationModel(0, documentSnapshot.get("spec_title_" + n).toString()));
+                                    for (long a = 1; a < (long) documentSnapshot.get("spec_title_"+n+"_ttl_fields") + 1; a++) {
+                                        productSpecificationModelList.add(new ProductSpecificationModel(1, documentSnapshot.get("spec_title_" +n+"_field_" +a+ "_name").toString(), documentSnapshot.get("spec_title_" +n+ "_field_" +a+ "_value").toString()));
+                                    }
+                                }
+                            } else {
+                                productdetailstabcontainer.setVisibility(View.GONE);
+                                productdetailsonlycontainer.setVisibility(View.VISIBLE);
+                                productOnlyDescritpion.setText(documentSnapshot.get("product_description").toString());
+                            }
+                            totlrating.setText((long) documentSnapshot.get("total_ratings") + "ratings");
+                            for (int c = 0; c < 5; c++) {
+                                TextView rating = (TextView) ratingsNo.getChildAt(c);
+                                rating.setText(String.valueOf((long)documentSnapshot.get(5-c+"_star")));
+
+                                ProgressBar progressBar = (ProgressBar) ratingprogresscontainer.getChildAt(c);
+                                int maxpro = Integer.parseInt(String.valueOf((long) documentSnapshot.get("total_ratings")));
+                                progressBar.setMax(maxpro);
+                                progressBar.setProgress(Integer.parseInt(String.valueOf((long) documentSnapshot.get((5-c)+"_star"))));
+                            }
+                            ttlratingfigure.setText(String.valueOf((long) documentSnapshot.get("total_ratings")));
+                            avgrate.setText(documentSnapshot.get("avg_rating").toString());
+                            productDetailsviewpager.setAdapter(new ProductDetailsAdapter(getSupportFragmentManager(), productDetailsTablayout.getTabCount(),productDescription,productOtherdetails,productSpecificationModelList));
+
+                        } else {
+                            String error = task.getException().getMessage();
+                            Toast.makeText(ProductActivity.this, error, Toast.LENGTH_LONG).show();
                         }
-                        rewtitle.setText((long)documentSnapshot.get("free_coupon")+documentSnapshot.get("free_coupon_title").toString());
-                        rewbody.setText(documentSnapshot.get("free_coupon_body").toString());
-
-                        if ((boolean)documentSnapshot.get("use_tab_layout")){
-                        productdetailstabcontainer.setVisibility(View.VISIBLE);
-                         productdetailsonlycontainer.setVisibility(View.GONE);
-                         productDescription = documentSnapshot.get("product_description").toString();
-                         ProductSpecification.productSpecificationModelList = new ArrayList();
-                         productOtherdetails = documentSnapshot.get("product_other_details").toString();
-
-                         for (long n = 1; n < (long)documentSnapshot.get("total_spec_title")+1; n++){
-                             ProductSpecification.productSpecificationModelList.add(new ProductSpecificationModel(0,documentSnapshot.get("spec_title_"+n).toString()));
-                             for (long a = 1; a<(long) documentSnapshot.get("spec_title_"+n+"_total_value")+1; a++){
-                                 ProductSpecification.productSpecificationModelList.add(new ProductSpecificationModel(1,documentSnapshot.get("spec_title_"+n+"_name_"+a).toString(),documentSnapshot.get("spec_title_"+n+"_value_"+a).toString()));
-                             }
-                         }
-                        }else {
-                            productdetailstabcontainer.setVisibility(View.GONE);
-                            productdetailsonlycontainer.setVisibility(View.VISIBLE);
-                            productOnlyDescritpion.setText(documentSnapshot.get("product_description").toString());
-                        }
-//                        ProductimagesAdapter productimagesAdapter = new ProductimagesAdapter(productImgs);
-//                        proimgviewpager.setAdapter(productimagesAdapter);
-                        totlrating.setText(documentSnapshot.get("total_ratiings")+"ratings");
-                        for (int c = 1; c< 6; c++ ){
-                            TextView rating = (TextView) ratingsNo.getChildAt(c);
-                            rating.setText(String.valueOf((long) documentSnapshot.get((6-c)+"_star")));
-                            ProgressBar progressBar = (ProgressBar) ratingprogresscontainer.getChildAt(c);
-                            int maxpro =  Integer.parseInt(String.valueOf((long)documentSnapshot.get("total_ratings")));
-                            progressBar.setMax(maxpro);
-                            progressBar.setProgress(Integer.parseInt(String.valueOf((long) documentSnapshot.get((6-c)+"_star"))));
-                        }
-                        ttlratingfigure .setText(String.valueOf((long)documentSnapshot.get("total_ratings")));
-
                     }
-                }else{
-                    String error = task.getException().getMessage();
-                    Toast.makeText(ProductActivity.this, error, Toast.LENGTH_LONG).show();
-                }
-                     }
                 });
 
         viewpagerIndi.setupWithViewPager(proimgviewpager, true);
@@ -204,16 +212,13 @@ public class ProductActivity extends AppCompatActivity {
                 } else {
                     ALREADY_ADDED_TO_WISH = true;
                     addtowish.setSupportImageTintList(getResources().getColorStateList(R.color.red));
+                    }
                 }
-            }
         });
-
-        productDetailsviewpager.setAdapter(new ProductDetailsAdapter(getSupportFragmentManager(), productDetailsTablayout.getTabCount()));
-        productDetailsviewpager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(productDetailsTablayout));
+          productDetailsviewpager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(productDetailsTablayout));
         productDetailsTablayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                tabposition = tab.getPosition();
                 productDetailsviewpager.setCurrentItem(tab.getPosition());
             }
 
@@ -284,7 +289,7 @@ public class ProductActivity extends AppCompatActivity {
         Addtocart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent addtocart = new Intent(ProductActivity.this,MyCart.class);
+                Intent addtocart = new Intent(ProductActivity.this, MyCart.class);
                 startActivity(addtocart);
             }
         });
