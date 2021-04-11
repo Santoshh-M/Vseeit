@@ -4,6 +4,7 @@ import android.content.Context;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -21,7 +22,7 @@ public class DBqueries {
     public static List<List<HomePagemodel>> lists = new ArrayList<>();
     public static List<String> loadedcategory = new ArrayList<>();
 
-    public static void loadcategories(final CategoryAdapter categoryAdapter, final Context context) {
+    public static void loadcategories(final RecyclerView category, final Context context) {
 
 
         firebaseFirestore = FirebaseFirestore.getInstance();
@@ -33,6 +34,8 @@ public class DBqueries {
                             for (QueryDocumentSnapshot documentSnapshot : task.getResult()) {
                                 category_modelList.add(new Category_model(documentSnapshot.get("icon").toString(), documentSnapshot.get("categoryName").toString()));
                             }
+                            CategoryAdapter categoryAdapter = new CategoryAdapter(category_modelList);
+                            category.setAdapter(categoryAdapter);
                             categoryAdapter.notifyDataSetChanged();
                         } else {
                             String error = task.getException().getMessage();
@@ -103,6 +106,7 @@ public class DBqueries {
                                 }
                             }
                             adapter.notifyDataSetChanged();
+                            Homefragment.refreshLayout.setRefreshing(false);
                         } else {
                             String error = task.getException().getMessage();
                             Toast.makeText(context, error, Toast.LENGTH_SHORT).show();

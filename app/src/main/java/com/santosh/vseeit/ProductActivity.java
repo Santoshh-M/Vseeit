@@ -289,8 +289,15 @@ public class ProductActivity extends AppCompatActivity {
         Addtocart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent addtocart = new Intent(ProductActivity.this, MyCart.class);
-                startActivity(addtocart);
+                Intent cart = new Intent(ProductActivity.this, MainActivity.class);
+                showCart = true;
+                startActivity(cart);
+            }
+        });
+        buynow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(ProductActivity.this, "Please wait a moment", Toast.LENGTH_SHORT).show();
             }
         });
     }

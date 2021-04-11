@@ -27,7 +27,7 @@ public class CategoryActivity extends AppCompatActivity {
         setContentView(R.layout.activity_category);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        String title = getIntent().getStringExtra("CategoryName");
+        String title = getIntent().getStringExtra("categoryName");
         getSupportActionBar().setTitle(title);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         categorycycle = findViewById(R.id.category_recycleview);
@@ -37,11 +37,10 @@ public class CategoryActivity extends AppCompatActivity {
         testlaymanager.setOrientation(LinearLayoutManager.VERTICAL);
         categorycycle.setLayoutManager(testlaymanager);
 
-
         int listposition = 0;
-        for (int s=0; s<loadedcategory.size();s++){
-            if (loadedcategory.get(s).equals(title.toUpperCase())){
-                listposition = s;
+        for (int v=0; v < loadedcategory.size();v++){
+            if (loadedcategory.get(v).equals(title.toUpperCase())){
+                listposition = v;
             }
         }
         if (listposition == 0){
