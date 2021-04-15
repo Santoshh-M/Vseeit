@@ -50,58 +50,58 @@ public class Homefragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         refreshLayout = view.findViewById(R.id.refresh_layout);
         nointconnection = view.findViewById(R.id.no_internet);
-
         categoryrecyclerView = view.findViewById(R.id.Category_recycler_view);
+        homecycle = view.findViewById(R.id.home_page_recycleview);
+
+        refreshLayout.setColorSchemeColors(getContext().getResources().getColor(R.color.colorPrimary),getContext().getResources().getColor(R.color.colorPrimary),getContext().getResources().getColor(R.color.colorPrimary));
+
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         categoryrecyclerView.setLayoutManager(layoutManager);
+
+        LinearLayoutManager testlaymanager = new LinearLayoutManager(getContext());
+        testlaymanager.setOrientation(LinearLayoutManager.VERTICAL);
+        homecycle.setLayoutManager(testlaymanager);
+
+
        //categoryfake
+        categoryfakemodelList.add(new Category_model("null",""));
+        categoryfakemodelList.add(new Category_model("",""));
+        categoryfakemodelList.add(new Category_model("",""));
+        categoryfakemodelList.add(new Category_model("",""));
+        categoryfakemodelList.add(new Category_model("",""));
+        categoryfakemodelList.add(new Category_model("",""));
+        categoryfakemodelList.add(new Category_model("",""));
+        categoryfakemodelList.add(new Category_model("",""));
+        categoryfakemodelList.add(new Category_model("",""));
+        categoryfakemodelList.add(new Category_model("",""));
+        categoryfakemodelList.add(new Category_model("",""));
 
-        categoryfakemodelList.add(new Category_model("null",""));
-        categoryfakemodelList.add(new Category_model("null",""));
-        categoryfakemodelList.add(new Category_model("null",""));
-        categoryfakemodelList.add(new Category_model("null",""));
-        categoryfakemodelList.add(new Category_model("null",""));
-        categoryfakemodelList.add(new Category_model("null",""));
-        categoryfakemodelList.add(new Category_model("null",""));
-        categoryfakemodelList.add(new Category_model("null",""));
-        categoryfakemodelList.add(new Category_model("null",""));
-        categoryfakemodelList.add(new Category_model("null",""));
+
         categoryAdapter = new CategoryAdapter(categoryfakemodelList);
-        categoryrecyclerView.setAdapter(categoryAdapter);
-        //categoryfake
 
-        //homefake
-        List<SliderModel> sliderfake = new ArrayList<>();
-        sliderfake.add(new SliderModel("null","#ffffff"));
-        sliderfake.add(new SliderModel("null","#ffffff"));
-        sliderfake.add(new SliderModel("null","#ffffff"));
-        sliderfake.add(new SliderModel("null","#ffffff"));
-        sliderfake.add(new SliderModel("null","#ffffff"));
-        //homefake
+
+        adapter = new HomePageAdapter(homePagefakemodelList);
+
+        //categoryfake
 
         connectivityManager = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
         networkInfo = connectivityManager.getActiveNetworkInfo();
         if (networkInfo != null && networkInfo.isConnected() == true) {
             nointconnection.setVisibility(View.GONE);
-
-
-
+            categoryAdapter = new CategoryAdapter(categoryfakemodelList);
+            adapter = new HomePageAdapter(homePagefakemodelList);
             if (category_modelList.size() == 0){
                 loadcategories(categoryrecyclerView,getContext());
             }else {
+                categoryAdapter = new CategoryAdapter(category_modelList);
                 categoryAdapter.notifyDataSetChanged();
             }
-            homecycle = view.findViewById(R.id.home_page_recycleview);
-            LinearLayoutManager testlaymanager = new LinearLayoutManager(getContext());
-            testlaymanager.setOrientation(LinearLayoutManager.VERTICAL);
-            homecycle.setLayoutManager(testlaymanager);
-
+            categoryrecyclerView.setAdapter(categoryAdapter);
             if (lists.size() == 0){
                 loadedcategory.add("HOME");
                 lists.add(new ArrayList<HomePagemodel>());
-                adapter = new HomePageAdapter(lists.get(0));
-                loadFragmentData(adapter,getContext(),0,"Home");
+                loadFragmentData(homecycle,getContext(),0,"Home");
             }else {
                 adapter = new HomePageAdapter(lists.get(0));
                 adapter.notifyDataSetChanged();
@@ -115,7 +115,7 @@ public class Homefragment extends Fragment {
         refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                refreshLayout.setRefreshing(true);
+                 refreshLayout.setRefreshing(true);
 
                 category_modelList.clear();
                 lists.clear();
@@ -123,12 +123,13 @@ public class Homefragment extends Fragment {
                 if (networkInfo != null && networkInfo.isConnected() == true) {
                     nointconnection.setVisibility(View.GONE);
                     categoryrecyclerView.setAdapter(categoryAdapter);
+                    homecycle.setAdapter(adapter);
 
                     loadcategories(categoryrecyclerView,getContext());
 
                     loadedcategory.add("HOME");
                     lists.add(new ArrayList<HomePagemodel>());
-                    loadFragmentData(adapter,getContext(),0,"Home");
+                    loadFragmentData(homecycle,getContext(),0,"Home");
                 } else {
                     Glide.with(getContext()).load(R.drawable.img).into(nointconnection);
                     nointconnection.setVisibility(View.VISIBLE);

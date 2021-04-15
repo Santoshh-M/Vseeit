@@ -37,10 +37,7 @@ public class HorizontalProductAdapter extends RecyclerView.Adapter<HorizontalPro
         String description = horizontalProductModelList.get(position).getProductdis();
         String price = horizontalProductModelList.get(position).getProductprice();
 
-        holder.setPrimg(resource);
-        holder.setPrtitle(title);
-        holder.setPrdis(description);
-        holder.setPrprice(price);
+        holder.setData(resource,title,description,price);
     }
 
     @Override
@@ -65,26 +62,23 @@ public class HorizontalProductAdapter extends RecyclerView.Adapter<HorizontalPro
             prdis = itemView.findViewById(R.id.h_s_product_dis);
             prprice = itemView.findViewById(R.id.h_s_product_price);
 
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent pdIntent = new Intent(itemView.getContext(),ProductActivity.class);
-                    itemView.getContext().startActivity(pdIntent);
-                }
-            });
         }
-        private void setPrimg(String resource){
+        private void setData(String resource,String title,String description,String price) {
 //            primg.setImageResource(resource);
             Glide.with(itemView.getContext()).load(resource).apply(new RequestOptions().placeholder(R.drawable.img)).into(primg);
-        }
-        private void setPrtitle(String title){
-            prtitle.setText(title);
-        }
-        private void setPrdis(String description){
+            prprice.setText("\u20b9 " + price + "/-");
             prdis.setText(description);
-        }
-        private void setPrprice(String price){
-            prprice.setText("\u20b9 "+price+"/-");
+            prtitle.setText(title);
+
+            if (!title.equals("")) {
+                itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent pdIntent = new Intent(itemView.getContext(), ProductActivity.class);
+                        itemView.getContext().startActivity(pdIntent);
+                    }
+                });
+            }
         }
     }
 }

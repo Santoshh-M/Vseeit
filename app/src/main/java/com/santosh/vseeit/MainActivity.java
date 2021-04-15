@@ -118,6 +118,7 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.main_notification_icon) {
             return true;
         } else if (id == R.id.main_cart_icon) {
+
           final Dialog signin = new Dialog(this);
             signin.setContentView(R.layout.dialog_signinup);
             signin.setCancelable(true);

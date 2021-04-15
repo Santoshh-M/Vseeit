@@ -45,7 +45,7 @@ public class DBqueries {
                 });
     }
 
-    public static void loadFragmentData(final HomePageAdapter adapter, final Context context, final int index, String categoryName) {
+    public static void loadFragmentData(final RecyclerView homepagecycle, final Context context, final int index, String categoryName) {
         firebaseFirestore.collection("CATEGORIES")
                 .document(categoryName.toUpperCase())
                 .collection("TOP_DEALS")
@@ -105,7 +105,9 @@ public class DBqueries {
                                     lists.get(index).add(new HomePagemodel(3, documentSnapshot.get("layout_title").toString(), documentSnapshot.get("layout_bg").toString(), GridLayoutModellist));
                                 }
                             }
-                            adapter.notifyDataSetChanged();
+                            HomePageAdapter hmeadapter = new HomePageAdapter(lists.get(index));
+                            homepagecycle.setAdapter(hmeadapter);
+                            hmeadapter.notifyDataSetChanged();
                             Homefragment.refreshLayout.setRefreshing(false);
                         } else {
                             String error = task.getException().getMessage();

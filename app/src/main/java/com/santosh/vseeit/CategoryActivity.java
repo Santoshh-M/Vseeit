@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static com.santosh.vseeit.DBqueries.lists;
 import static com.santosh.vseeit.DBqueries.loadFragmentData;
@@ -20,6 +21,7 @@ public class CategoryActivity extends AppCompatActivity {
 
     private RecyclerView categorycycle;
     private HomePageAdapter adapter;
+    private List<HomePagemodel> homePagefakemodelList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,12 +32,37 @@ public class CategoryActivity extends AppCompatActivity {
         String title = getIntent().getStringExtra("categoryName");
         getSupportActionBar().setTitle(title);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        categorycycle = findViewById(R.id.category_recycleview);
 
-        //////////
+        //homefake
+        List<SliderModel> sliderfake = new ArrayList<>();
+        sliderfake.add(new SliderModel("null","#dfdfdf"));
+        sliderfake.add(new SliderModel("null","#dfdfdf"));
+        sliderfake.add(new SliderModel("null","#dfdfdf"));
+        sliderfake.add(new SliderModel("null","#dfdfdf"));
+        sliderfake.add(new SliderModel("null","#dfdfdf"));
+
+        List<HorizontalProductModel> horizontalfakeModelList = new ArrayList<>();
+
+        horizontalfakeModelList.add(new HorizontalProductModel("","","","",""));
+        horizontalfakeModelList.add(new HorizontalProductModel("","","","",""));
+        horizontalfakeModelList.add(new HorizontalProductModel("","","","",""));
+        horizontalfakeModelList.add(new HorizontalProductModel("","","","",""));
+        horizontalfakeModelList.add(new HorizontalProductModel("","","","",""));
+        horizontalfakeModelList.add(new HorizontalProductModel("","","","",""));
+        horizontalfakeModelList.add(new HorizontalProductModel("","","","",""));
+
+        homePagefakemodelList.add(new HomePagemodel(0,sliderfake));
+        homePagefakemodelList.add(new HomePagemodel(1,"","#dfdfdf"));
+        homePagefakemodelList.add(new HomePagemodel(2,"","#dfdfdf",horizontalfakeModelList,new ArrayList<Wishlistmodel>()));
+        homePagefakemodelList.add(new HomePagemodel(3,"","#dfdfdf",horizontalfakeModelList));
+        //homefake
+
+
+        categorycycle = findViewById(R.id.category_recycleview);
         LinearLayoutManager testlaymanager = new LinearLayoutManager(this);
         testlaymanager.setOrientation(LinearLayoutManager.VERTICAL);
         categorycycle.setLayoutManager(testlaymanager);
+        adapter = new HomePageAdapter(homePagefakemodelList);
 
         int listposition = 0;
         for (int v=0; v < loadedcategory.size();v++){
@@ -46,8 +73,7 @@ public class CategoryActivity extends AppCompatActivity {
         if (listposition == 0){
             loadedcategory.add(title.toUpperCase());
             lists.add(new ArrayList<HomePagemodel>());
-            adapter = new HomePageAdapter(lists.get(loadedcategory.size() - 1));
-            loadFragmentData(adapter,this,loadedcategory.size() - 1,title);
+            loadFragmentData(categorycycle,this,loadedcategory.size() - 1,title);
         }else{
             adapter = new HomePageAdapter(lists.get(listposition));
         }
