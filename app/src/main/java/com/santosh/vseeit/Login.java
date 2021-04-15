@@ -48,6 +48,8 @@ private FirebaseAuth firebaseAuth;
 private ProgressBar logonprogress;
 
 private String Emailpattern = "^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+    public static Boolean disableclsebtn = false;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -66,6 +68,11 @@ private String Emailpattern = "^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(
         loginbtn = view.findViewById(R.id.btn_sign);
 
         firebaseAuth = FirebaseAuth.getInstance();
+        if (disableclsebtn){
+            closebtnlog.setVisibility(View.GONE);
+        }else {
+            closebtnlog.setVisibility(View.VISIBLE);
+        }
         return view;
     }
 
@@ -131,7 +138,6 @@ private String Emailpattern = "^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(
             }
         });
     }
-
     private void setFragment(Fragment fragment){
         FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
         fragmentTransaction.setCustomAnimations(R.anim.slide_from_right,R.anim.slideout_from_left);
@@ -182,8 +188,12 @@ private String Emailpattern = "^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(
         }
     }
     private void closeintent(){
-        Intent intent = new Intent(getActivity(),MainActivity.class);
-        startActivity(intent);
+        if (disableclsebtn){
+            disableclsebtn = false;
+        }else {
+            Intent intent = new Intent(getActivity(), MainActivity.class);
+            startActivity(intent);
+        }
         getActivity().finish();
     }
 }

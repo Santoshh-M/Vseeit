@@ -15,6 +15,7 @@ public class register extends AppCompatActivity {
     public static boolean onResetPasswordFragment = false;
     public static boolean setsignup = false;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,6 +33,8 @@ public class register extends AppCompatActivity {
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK){
+            Signup.disclosebtn = false;
+            Login.disableclsebtn = false;
             if (onResetPasswordFragment){
                 onResetPasswordFragment = false;
                 setFragment(new Login());

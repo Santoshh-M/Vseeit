@@ -28,7 +28,6 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
@@ -54,6 +53,8 @@ public class Signup extends Fragment {
     private FirebaseAuth firebaseAuth;
     private String blockCharacterSet = "~#^|$%&*!.,[{]}}";
     private String emailpattern="^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+    public static Boolean disclosebtn = false;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -73,6 +74,12 @@ public class Signup extends Fragment {
         progress = view.findViewById(R.id.progressignup);
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseFirestore = FirebaseFirestore.getInstance();
+
+        if (disclosebtn){
+            closebtnsignup.setVisibility(View.GONE);
+        }else {
+            closebtnsignup.setVisibility(View.VISIBLE);
+        }
         return view;
     }
 
@@ -184,7 +191,6 @@ public class Signup extends Fragment {
         });
     }
 
-
     private void setFragment(Fragment fragment) {
         FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
         fragmentTransaction.setCustomAnimations(R.anim.slide_from_left, R.anim.slideout_from_right);
@@ -201,7 +207,6 @@ public class Signup extends Fragment {
             return null;
         }
     };
-
     private void checkInputs() {
         if (!TextUtils.isEmpty(email.getText())) {
             if (!TextUtils.isEmpty(firstname.getText())) {
@@ -243,30 +248,43 @@ public class Signup extends Fragment {
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()){
 
-                                    Map<Object,String> userdata = new HashMap<>();
+                                    Map<String,Object> userdata = new HashMap<>();
                                     userdata.put("Firstname",firstname.getText().toString());
                                     userdata.put("Lastname",lastname.getText().toString());
                                     userdata.put("Email",email.getText().toString());
-                                    firebaseFirestore.collection("USERS")
-                                            .add(userdata)
-                                            .addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+                                    firebaseFirestore.collection("USERS").document(firebaseAuth.getUid())
+                                            .set(userdata)
+                                            .addOnCompleteListener(new OnCompleteListener<Void>() {
                                                 @Override
-                                                public void onComplete(@NonNull Task<DocumentReference> task) {
-                                                if (task.isSuccessful()){
-                                                    Intent mainintent = new Intent (getActivity(),MainActivity.class);
-                                                    startActivity(mainintent);
-                                                    getActivity().finish();
-                                                }else{
+                                                public void onComplete(@NonNull Task<Void> task) {
+                                                    if (task.isSuccessful()){
+                                                        Map<String,Object> listSize = new HashMap<>();
+                                                        listSize.put("list_size",(long)0);
+                                                       firebaseFirestore.collection("USERS")
+                                                               .document(firebaseAuth.getUid())
+                                                               .collection("USER_DATA")
+                                                               .document("MY_WISHLIST")
+                                                               .set(listSize).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                           @Override
+                                                           public void onComplete(@NonNull Task<Void> task) {
+                                                               if (task.isSuccessful()){
+                                                                   mainIntent();
+                                                               }else{
+                                                                   progress.setVisibility(View.INVISIBLE);
+                                                                   signup.setEnabled(true);
+                                                                   signup.setTextColor(Color.rgb(255,255,255));
+                                                                   String error = task.getException().getMessage();
+                                                                   Toast.makeText(getActivity(), error, Toast.LENGTH_SHORT).show();
+                                                               }
+                                                           }
+                                                       });
 
-                                                    progress.setVisibility(View.INVISIBLE);
-                                                    signup.setEnabled(true);
-                                                    signup.setTextColor(Color.rgb(255,255,255));
-                                                    String error = task.getException().getMessage();
-                                                    Toast.makeText(getActivity(), "Give the valid input", Toast.LENGTH_SHORT).show();
-                                                }
+                                                    }else{
+                                                        String error = task.getException().getMessage();
+                                                        Toast.makeText(getActivity(), error, Toast.LENGTH_SHORT).show();
+                                                    }
                                                 }
                                             });
-
                                 }else{
                                     progress.setVisibility(View.INVISIBLE);
                                     signup.setEnabled(true);
@@ -283,5 +301,14 @@ public class Signup extends Fragment {
         }else{
             email.setError("Invalid email");
         }
+    }
+    private void mainIntent(){
+        if (disclosebtn){
+            disclosebtn = false;
+        }else {
+        Intent mainintent = new Intent (getActivity(),MainActivity.class);
+        startActivity(mainintent);
+        }
+        getActivity().finish();
     }
 }

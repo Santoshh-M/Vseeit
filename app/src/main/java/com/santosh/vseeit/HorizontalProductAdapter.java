@@ -37,7 +37,7 @@ public class HorizontalProductAdapter extends RecyclerView.Adapter<HorizontalPro
         String description = horizontalProductModelList.get(position).getProductdis();
         String price = horizontalProductModelList.get(position).getProductprice();
 
-        holder.setData(resource,title,description,price);
+        holder.setData(productID,resource,title,description,price);
     }
 
     @Override
@@ -63,7 +63,7 @@ public class HorizontalProductAdapter extends RecyclerView.Adapter<HorizontalPro
             prprice = itemView.findViewById(R.id.h_s_product_price);
 
         }
-        private void setData(String resource,String title,String description,String price) {
+        private void setData(final String productId, String resource, String title, String description, String price) {
 //            primg.setImageResource(resource);
             Glide.with(itemView.getContext()).load(resource).apply(new RequestOptions().placeholder(R.drawable.img)).into(primg);
             prprice.setText("\u20b9 " + price + "/-");
@@ -75,6 +75,7 @@ public class HorizontalProductAdapter extends RecyclerView.Adapter<HorizontalPro
                     @Override
                     public void onClick(View v) {
                         Intent pdIntent = new Intent(itemView.getContext(), ProductActivity.class);
+                        pdIntent.putExtra("PRODUCT_ID",productId);
                         itemView.getContext().startActivity(pdIntent);
                     }
                 });

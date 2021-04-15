@@ -8,6 +8,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -17,10 +19,12 @@ import java.util.List;
 
 public class DBqueries {
 
+
     public static FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
     public static List<Category_model> category_modelList = new ArrayList<>();
     public static List<List<HomePagemodel>> lists = new ArrayList<>();
     public static List<String> loadedcategory = new ArrayList<>();
+    public static List<String> wishlist = new ArrayList<>();
 
     public static void loadcategories(final RecyclerView category, final Context context) {
 
@@ -44,7 +48,6 @@ public class DBqueries {
                     }
                 });
     }
-
     public static void loadFragmentData(final RecyclerView homepagecycle, final Context context, final int index, String categoryName) {
         firebaseFirestore.collection("CATEGORIES")
                 .document(categoryName.toUpperCase())
@@ -115,5 +118,23 @@ public class DBqueries {
                         }
                     }
                 });
+    }
+    public static void loadwishlist(final Context context){
+        firebaseFirestore.collection("USERS").document(FirebaseAuth.getInstance().getUid())
+                .collection("USER_DATA")
+                .document("MY_WISHLIST")
+                .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+           if (task.isSuccessful()){
+               for (long s=0; s< (long) task.getResult().get("list_size"); s++){
+                   wishlist.add(task.getResult().get("product_ID_"+s).toString());
+               }
+           }else{
+               String error = task.getException().getMessage();
+               Toast.makeText(context, error, Toast.LENGTH_SHORT).show();
+           }
+            }
+        });
     }
 }
